@@ -1,4 +1,4 @@
-import {ActivityIndicator, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import ScreenLayout from '../components/ScreenLayout';
 import LogoSvg from '../../assets/images/logo.svg';
 

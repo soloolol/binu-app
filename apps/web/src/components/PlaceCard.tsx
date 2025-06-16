@@ -1,3 +1,5 @@
+"use client";
+
 import { Place } from "@/types/Place";
 import TagList from "./TagList";
 import { Bookmark } from "lucide-react";

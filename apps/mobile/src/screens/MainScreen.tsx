@@ -18,10 +18,10 @@ import Map from '@/components/Map';
 
 export default function MainScreen() {
   const [query, setQuery] = useState<string>('');
-  const [results, setResults] = useState<object>([]);
   const [onFocus, setOnFocus] = useState<boolean>(false);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['5%', '30%', '50%', '90%'], []);
+  const coord = '127.12345;37.12345';
 
   useEffect(() => {
     if (onFocus) {
@@ -76,7 +76,10 @@ export default function MainScreen() {
                 </View>
                 <View className="h-full w-full ">
                   <WebView
-                    source={{uri: 'http://localhost:3000'}}
+                    source={{
+                      uri: `http://localhost:3000/search?coord=
+                      ${coord}`,
+                    }}
                     className="h-full w-full"
                     onMessage={event => {
                       console.log(

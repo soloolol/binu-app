@@ -9,6 +9,10 @@ module.exports = {
     "../../packages/ui/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        pulse: "pulse 0.8s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
+    },
   },
 };

@@ -1,4 +1,5 @@
 import { Place } from "@/types/Place";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 const places: Place[] = [
   {
@@ -24,10 +25,16 @@ const places: Place[] = [
   },
 ];
 
-export default async function fetchPlaces(): Promise<Place[]> {
-  // const res = await fetch(`${process.env.API_BASE_URL}/tags`, {
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+export default async function fetchPlaces(
+  searchParams: ReadonlyURLSearchParams
+): Promise<Place[]> {
+  const query = searchParams.toString();
+  // const res = await fetch(`${process.env.API_BASE_URL}/search?${query}`, {
   //   // next: { revalidate: 60 }, // ISR 사용 시
   // });
   // const tagList: TagInfo[] = await res.json();
+  await delay(3000);
   return places;
 }
