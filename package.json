@@ -1,0 +1,20 @@
+{
+  "name": "binu-app",
+  "version": "1.0.0",
+  "description": "사용자 리뷰 기반의 음식점, 카페 화장실 위생 리뷰 플랫폼, Hybrid app based ReactNative and React(Nextjs).",
+  "license": "ISC",
+  "author": "sol",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "fs-extra": "^11.3.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.27.4",
+    "react-native-cli": "^2.0.1"
+  }
+}

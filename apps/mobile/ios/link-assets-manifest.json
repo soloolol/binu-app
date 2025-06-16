@@ -1,0 +1,33 @@
+{
+  "migIndex": 2,
+  "data": [
+    {
+      "path": "../../packages/assets/fonts/SourceSerif4-Bold.ttf",
+      "sha1": "bd4f1c2681cc14e9309db4d2367d3487c50642ab"
+    },
+    {
+      "path": "../../packages/assets/fonts/SourceSerif4-ExtraBold.ttf",
+      "sha1": "9c99435dedc363c9bc2d8aa97546745b0f232ae8"
+    },
+    {
+      "path": "../../packages/assets/fonts/SourceSerif4-ExtraLight.ttf",
+      "sha1": "1a4b24b07936adc9eac49e735c1e28c34af46bd0"
+    },
+    {
+      "path": "../../packages/assets/fonts/SourceSerif4-Light.ttf",
+      "sha1": "1b566cb611d391c13fd61cc47839ef90ec8736e0"
+    },
+    {
+      "path": "../../packages/assets/fonts/SourceSerif4-Medium.ttf",
+      "sha1": "5f517a203a7d134a0361ed222fb33bfbb1b324eb"
+    },
+    {
+      "path": "../../packages/assets/fonts/SourceSerif4-Regular.ttf",
+      "sha1": "31fbae3440cd8f1f60798029991c77d006a1cf93"
+    },
+    {
+      "path": "../../packages/assets/fonts/SourceSerif4-SemiBold.ttf",
+      "sha1": "62644fa0ca38cd56c58538469aa2538dea9eadfe"
+    }
+  ]
+}

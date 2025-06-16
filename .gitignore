@@ -1,0 +1,71 @@
+# === Node.js ===
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# === macOS ===
+.DS_Store
+
+# === Logs ===
+*.log
+
+# === TypeScript ===
+*.tsbuildinfo
+
+# === Environment Files ===
+.env
+.env.local
+.env.*.local
+
+# === Output ===
+dist/
+build/
+.next/
+out/
+
+# === React Native ===
+# iOS
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/*.xcworkspace
+ios/*.xcodeproj/project.xcworkspace/
+ios/*.xcodeproj/xcuserdata/
+ios/*.xcodeproj/*.pbxuser
+ios/*.xcodeproj/*.mode1v3
+ios/*.xcodeproj/*.mode2v3
+ios/*.xcodeproj/*.perspectivev3
+
+# Android
+android/.gradle/
+android/app/build/
+android/build/
+android/local.properties
+android/.idea/
+android/.cxx/
+
+# React Native Cache
+__generated__/
+.expo/
+.expo-shared/
+*.keystore
+
+# Metro + Watchman
+.metro-cache/
+.watchmanconfig
+
+# === VSCode ===
+.vscode/
+.history/
+
+# === Testing ===
+coverage/
+jest-html-reporters-*.html
+
+# === Git ===
+*.orig
+
+# === Monorepo ===
+.pnpm-store/
