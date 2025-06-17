@@ -3,6 +3,7 @@ import { ReadonlyURLSearchParams } from "next/navigation";
 
 const places: Place[] = [
   {
+    id: "123",
     title: "피자 하우스",
     subtitle: "이탈리안",
     binuScore: 4.8,
@@ -11,6 +12,7 @@ const places: Place[] = [
     bookmark: true,
   },
   {
+    id: "124",
     title: "주점 은붕어",
     subtitle: "주점",
     binuScore: 4.5,
@@ -35,6 +37,6 @@ export default async function fetchPlaces(
   //   // next: { revalidate: 60 }, // ISR 사용 시
   // });
   // const tagList: TagInfo[] = await res.json();
-  await delay(3000);
+  await delay(2000);
   return places;
 }

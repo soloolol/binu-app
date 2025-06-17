@@ -69,3 +69,4 @@ jest-html-reporters-*.html
 
 # === Monorepo ===
 .pnpm-store/
+apps/mobile/ios/Podfile.lock

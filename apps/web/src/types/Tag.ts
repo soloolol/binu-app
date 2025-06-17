@@ -10,3 +10,5 @@ export type TagFilter = TagInfo & {
 };
 
 export type TagDefinitions = Record<string, TagInfo>;
+
+export type TagDefMap = { tagDefMap: TagDefinitions };

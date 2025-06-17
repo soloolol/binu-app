@@ -38,7 +38,9 @@
 
 @theme {
   --color-primary: #a1f4de;
+  --color-secondary: #4fd6b2;
   --color-dark: #1b2824;
+  --color-light: #fafefd;
 }
 
 .scrollbar-hide::-webkit-scrollbar {

@@ -3,8 +3,10 @@
 import { Place } from "@/types/Place";
 import TagList from "./TagList";
 import { Bookmark } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function PlaceCard({
+  id,
   title,
   subtitle,
   binuScore,
@@ -12,8 +14,15 @@ export default function PlaceCard({
   tags,
   bookmark,
 }: Place) {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/place/${id}`);
+  };
   return (
-    <div className="flex flex-col justify-between w-full space-y-1 bg-white rounded-xl shadow p-4">
+    <div
+      onClick={handleClick}
+      className="flex flex-col justify-between w-full space-y-1 bg-white rounded-xl shadow p-4"
+    >
       <div className="flex justify-between items-center">
         <h3 className="text-dark/95 text-[13pt] font-source font-bold">
           {title}
@@ -34,8 +43,10 @@ export default function PlaceCard({
         </div>
         <span className="text-gray-400">★ {starScore.toFixed(1)} stars</span>
       </div>
-      <div className="flex flex-wrap gap-1">
-        <TagList tags={tags} />
+      <div className="flex flex-wrap gap-1 w-full overflow-hidden">
+        <div className="flex overflow-x-auto whitespace-nowrap gap-x-2 scrollbar-hide">
+          <TagList tags={tags} />
+        </div>
       </div>
     </div>
   );

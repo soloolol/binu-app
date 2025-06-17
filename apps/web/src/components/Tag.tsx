@@ -1,8 +1,8 @@
-type TagProps = {
+interface TagProps {
   label: string;
   isHighlight?: boolean;
   onClick?: () => void;
-};
+}
 
 export default function Tag({ label, isHighlight, onClick }: TagProps) {
   return (
