@@ -1,8 +1,8 @@
 import { PlaceDetails } from "@/types/Place";
-import { ReadonlyURLSearchParams } from "next/navigation";
 
 const placeDetails: PlaceDetails = {
-  title: "피자 하우스",
+  id: "123",
+  name: "피자 하우스",
   subtitle: "이탈리안",
   binuScore: 4.8,
   starScore: 4.7,
@@ -29,7 +29,7 @@ const placeDetails: PlaceDetails = {
   ],
 };
 
-export default async function getPlaceDetails(
+export default async function fetchPlaceDetailsById(
   id: string
 ): Promise<PlaceDetails> {
   // const res = await fetch(`${process.env.API_BASE_URL}/place/${id}`, {

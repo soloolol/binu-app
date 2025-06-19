@@ -23,7 +23,7 @@ export default async function RootLayout({
         <meta charSet="utf-8" />
         <script type="text/javascript"></script>
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased bg-light`}>
         <ScriptInjector tagDefinitions={tagDefinitions} />
         {children}
       </body>

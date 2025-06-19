@@ -1,31 +1,38 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useTagStore } from "@/stores/tagStore";
 import Tag from "@/components/Tag";
-import { TagFilter } from "@/types/Tag";
+import { TagInfoWithIsChecked } from "@/types/Tag";
 import { SlidersHorizontal } from "lucide-react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Filter() {
-  const TAG = useTagStore((state) => state.tagDefinitions);
-  const [tagFilters, setTagFilters] = useState<TagFilter[]>([]);
+  const TAG_DEFINITION = useTagStore((state) => state.tagDefinitions);
+  const router = useRouter();
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
+  const tags = searchParams.getAll("tags");
+  const [tagFilters, setTagFilters] = useState<TagInfoWithIsChecked[]>([]);
 
   useEffect(() => {
-    if (!TAG) return;
-    const filters = Object.entries(TAG).map(([key, value]) => ({
-      ...value,
-      isCheck: false,
-    }));
-    setTagFilters(filters);
-  }, [TAG]);
-
-  const toggleCheck = useCallback((key: string) => {
-    setTagFilters((prev) =>
-      prev.map((tag) =>
-        tag.tagKey === key ? { ...tag, isCheck: !tag.isCheck } : tag
-      )
+    if (!TAG_DEFINITION) return;
+    const filters: TagInfoWithIsChecked[] = Object.entries(TAG_DEFINITION).map(
+      ([_, value]) => ({
+        ...value,
+        isChecked: tags.includes(value.tagKey),
+      })
     );
-  }, []);
+    setTagFilters(filters);
+  }, [TAG_DEFINITION, searchParams]);
+
+  const toggleTag = (key: string) => {
+    let params = new URLSearchParams(searchParams);
+    params.has("tags", key)
+      ? params.delete("tags", key)
+      : params.append("tags", key);
+    router.push(`${pathName}?${params.toString()}`);
+  };
 
   return (
     <div className="flex w-full overflow-hidden pb-3 gap-x-2">
@@ -45,8 +52,8 @@ export default function Filter() {
             <Tag
               key={tag.index}
               label={tag.label}
-              isHighlight={tag.isCheck}
-              onClick={() => toggleCheck(tag.tagKey)}
+              isHighlight={tag.isChecked}
+              onClick={() => toggleTag(tag.tagKey)}
             />
           ))}
       </div>

@@ -1,16 +1,24 @@
 import { TagDefinitions, TagInfo } from "@/types/Tag";
 
 const TAG_RES_SAMPLE: TagInfo[] = [
-  { tagKey: "hasSoap", label: "비누있음 🧼", index: 0, isRequired: true },
+  {
+    tagKey: "hasSoap",
+    label: "비누있음 🧼",
+    oppositeLabel: "비누없음",
+    index: 0,
+    isRequired: true,
+  },
   {
     tagKey: "hasToiletPaper",
     label: "화장지있음 🧻",
+    oppositeLabel: "화장지없음",
     index: 1,
     isRequired: true,
   },
   {
     tagKey: "genderSeparated",
     label: "남/여 구분",
+    oppositeLabel: "남/여 공용",
     index: 2,
     isRequired: true,
   },

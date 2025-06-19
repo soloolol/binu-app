@@ -1,7 +1,7 @@
 import PlaceDetails from "@/components/PlaceDetails";
-import fetchPlaceDetailsById from "@/lib/fetchPlaceDetailsById";
+import fetchPlaceDetailsById from "@/lib/place/fetchPlaceDetailsById";
 
-export default async function Place({
+export default async function PlacePage({
   params,
 }: {
   params: Promise<{ id: string }>;

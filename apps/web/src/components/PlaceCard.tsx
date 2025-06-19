@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 export default function PlaceCard({
   id,
-  title,
+  name,
   subtitle,
   binuScore,
   starScore,
@@ -25,7 +25,7 @@ export default function PlaceCard({
     >
       <div className="flex justify-between items-center">
         <h3 className="text-dark/95 text-[13pt] font-source font-bold">
-          {title}
+          {name}
         </h3>
         <button className="text-gray-400">
           <Bookmark

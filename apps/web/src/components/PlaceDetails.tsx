@@ -17,7 +17,8 @@ import { useRouter } from "next/navigation";
 const notoSans = Noto_Sans_KR({ subsets: ["latin"] });
 
 export default function PlaceDetails({
-  title,
+  id,
+  name,
   subtitle,
   binuScore,
   starScore,
@@ -26,13 +27,20 @@ export default function PlaceDetails({
   reviews,
 }: PlaceDetails) {
   const router = useRouter();
-  const handleClick = () => {
+  function goBack() {
     router.back();
-  };
+  }
+  function goReview(id: string) {
+    router.push(`/review/[${id}]`);
+  }
   return (
     <div className="flex flex-col justify-between w-full space-y-8 bg-white rounded-xl shadow p-4">
       <div className="flex justify-start items-center">
-        <button onClick={handleClick}>
+        <button
+          onClick={() => {
+            goBack;
+          }}
+        >
           <ChevronLeft className=" text-gray-500" />
         </button>
       </div>
@@ -40,7 +48,7 @@ export default function PlaceDetails({
       <article className="info flex flex-col justify-between w-full space-y-3">
         <div className="flex justify-between items-center">
           <h3 className="text-dark/95 text-[16pt] font-source font-bold">
-            {title}
+            {name}
           </h3>
           <div className="flex justify-center items-center gap-3">
             <Share2Icon className="text-gray-500 w-5 stroke-2 fill-gray-500" />
@@ -76,7 +84,12 @@ export default function PlaceDetails({
       </article>
 
       <div className="flex justify-center items-center">
-        <button className="flex justify-center items-center gap-2 w-4/5 h-12 rounded-4xl border-secondary border-1">
+        <button
+          className="flex justify-center items-center gap-2 w-4/5 h-12 rounded-4xl border-secondary border-1"
+          onClick={() => {
+            goReview(id);
+          }}
+        >
           <PlusCircleIcon className="stroke-secondary stroke-1 w-5"></PlusCircleIcon>
           <span className="pr-4">리뷰 작성 하기</span>
         </button>

@@ -1,5 +1,5 @@
 interface TagProps {
-  label: string;
+  label?: string;
   isHighlight?: boolean;
   onClick?: () => void;
 }

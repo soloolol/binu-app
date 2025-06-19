@@ -1,10 +1,10 @@
 import { Place } from "@/types/Place";
-import { ReadonlyURLSearchParams } from "next/navigation";
+import { SearchParams } from "@/types/SearchParams";
 
 const places: Place[] = [
   {
     id: "123",
-    title: "피자 하우스",
+    name: "피자 하우스",
     subtitle: "이탈리안",
     binuScore: 4.8,
     starScore: 4.7,
@@ -13,7 +13,7 @@ const places: Place[] = [
   },
   {
     id: "124",
-    title: "주점 은붕어",
+    name: "주점 은붕어",
     subtitle: "주점",
     binuScore: 4.5,
     starScore: 4.7,
@@ -30,13 +30,13 @@ const places: Place[] = [
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default async function fetchPlaces(
-  searchParams: ReadonlyURLSearchParams
+  searchParams: SearchParams
 ): Promise<Place[]> {
   const query = searchParams.toString();
   // const res = await fetch(`${process.env.API_BASE_URL}/search?${query}`, {
   //   // next: { revalidate: 60 }, // ISR 사용 시
   // });
   // const tagList: TagInfo[] = await res.json();
-  await delay(2000);
+  await delay(1000);
   return places;
 }

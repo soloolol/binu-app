@@ -1,13 +1,13 @@
-export type Place = {
+export interface Place {
   id: string;
-  title: string;
+  name: string;
   subtitle: string;
   binuScore: number;
   starScore: number;
   tags: string[];
   ai?: boolean;
   bookmark?: boolean;
-};
+}
 
 export type Review = {
   id: string;
@@ -18,13 +18,6 @@ export type Review = {
   profileImgUrl: string;
 };
 
-export type PlaceDetails = {
-  title: string;
-  subtitle: string;
-  binuScore: number;
-  starScore: number;
-  tags: string[];
-  ai?: boolean;
-  bookmark?: boolean;
+export interface PlaceDetails extends Place {
   reviews: Review[];
-};
+}
