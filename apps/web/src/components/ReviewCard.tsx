@@ -8,7 +8,7 @@ interface ReviewCardProps {
 
 export default function ReviewCard({ review }: ReviewCardProps) {
   return (
-    <div className="flex flex-col gap-3 items-start rounded-lg border-secondary border-1 bg-light p-4">
+    <article className="flex flex-col gap-3 items-start rounded-lg border-secondary border-1 bg-light p-4">
       <div className="flex items-center gap-5 font-source">
         <Image
           src={review.profileImgUrl}
@@ -24,6 +24,6 @@ export default function ReviewCard({ review }: ReviewCardProps) {
       </div>
       <BinuScore score={review.binuScore} />
       <div>{review.content}</div>
-    </div>
+    </article>
   );
 }

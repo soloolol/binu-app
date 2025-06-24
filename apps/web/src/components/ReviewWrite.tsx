@@ -123,7 +123,7 @@ export default function ReviewWrite({ id, name }: ReviewWriteProps) {
             //submit
           }}
         >
-          <span className="pr-4">리뷰 작성 하기</span>
+          <span className="pr-4">리뷰 작성 완료</span>
         </button>
       </article>
     </div>

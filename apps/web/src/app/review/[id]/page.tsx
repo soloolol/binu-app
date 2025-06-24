@@ -1,7 +1,7 @@
 import ReviewWrite from "@/components/ReviewWrite";
 import fetchPlaceNameById from "@/lib/place/fetchPlaceNameById";
 
-export default async function ReviewPage({
+export default async function Page({
   params,
 }: {
   params: Promise<{ id: string }>;

@@ -13,6 +13,7 @@ import {
 import ReviewCard from "./ReviewCard";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import NavigationHeader from "./NavigationHeader";
 
 const notoSans = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -27,26 +28,14 @@ export default function PlaceDetails({
   reviews,
 }: PlaceDetails) {
   const router = useRouter();
-  function goBack() {
-    router.back();
-  }
   function goReview(id: string) {
     router.push(`/review/[${id}]`);
   }
   return (
     <div className="flex flex-col justify-between w-full space-y-8 bg-white rounded-xl shadow p-4">
-      <div className="flex justify-start items-center">
-        <button
-          onClick={() => {
-            goBack;
-          }}
-        >
-          <ChevronLeft className=" text-gray-500" />
-        </button>
-      </div>
-
-      <article className="info flex flex-col justify-between w-full space-y-3">
-        <div className="flex justify-between items-center">
+      <NavigationHeader />
+      <section className="info flex flex-col justify-between w-full space-y-3">
+        <section className="flex justify-between items-center">
           <h3 className="text-dark/95 text-[16pt] font-source font-bold">
             {name}
           </h3>
@@ -56,9 +45,9 @@ export default function PlaceDetails({
               className={`text-gray-500 w-6 h-7 ${bookmark ?? "fill-dark/80"} stroke-2`}
             />
           </div>
-        </div>
+        </section>
         <p className="text-gray-500 text-[13pt] font-bold">{subtitle}</p>
-        <div className="font-medium flex items-center space-x-2">
+        <section className="font-medium flex items-center space-x-2">
           <div className="flex items-center space-x-1">
             <Image
               src="/images/binuIcon.svg"
@@ -71,19 +60,21 @@ export default function PlaceDetails({
             </span>
           </div>
           <span className="text-gray-400">★ {starScore.toFixed(1)} stars</span>
-        </div>
-        <div
-          className={`flex items-center gap-1 ${notoSans.className} text-xs text-[#3BA68A]`}
-        >
-          최근 10개의 리뷰를 요약한 결과입니다
-          <MessageCircleQuestionIcon className="w-3" />
-        </div>
-        <div className="grid grid-cols-3 whitespace-nowrap gap-x-2 gap-y-3">
-          <TagList tags={tags} />
-        </div>
-      </article>
+        </section>
+        <section>
+          <div
+            className={`flex items-center gap-1 ${notoSans.className} text-xs text-[#3BA68A]`}
+          >
+            최근 10개의 리뷰를 요약한 결과입니다
+            <MessageCircleQuestionIcon className="w-3" />
+          </div>
+          <div className="grid grid-cols-3 whitespace-nowrap gap-x-2 gap-y-3">
+            <TagList tags={tags} />
+          </div>
+        </section>
+      </section>
 
-      <div className="flex justify-center items-center">
+      <section className="flex justify-center items-center">
         <button
           className="flex justify-center items-center gap-2 w-4/5 h-12 rounded-4xl border-secondary border-1"
           onClick={() => {
@@ -93,16 +84,16 @@ export default function PlaceDetails({
           <PlusCircleIcon className="stroke-secondary stroke-1 w-5"></PlusCircleIcon>
           <span className="pr-4">리뷰 작성 하기</span>
         </button>
-      </div>
+      </section>
 
-      <article className="reviewList flex flex-col justify-between w-full space-y-3">
+      <section className="reviewList flex flex-col justify-between w-full space-y-3">
         <h3 className="text-dark/95 text-[16pt] font-source font-bold">
           Binuer’s review 🧼
         </h3>
         {reviews.map((review) => (
           <ReviewCard key={review.id} review={review} />
         ))}
-      </article>
+      </section>
     </div>
   );
 }
