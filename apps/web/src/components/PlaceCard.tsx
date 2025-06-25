@@ -4,6 +4,13 @@ import { Place } from "@/types/Place";
 import TagList from "./TagList";
 import { Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import getBookmark from "@/lib/bookmark/getBookmark";
+import deleteBookmarkById from "@/lib/bookmark/deleteBookmarkById";
+import postBookmark from "@/lib/bookmark/postBookmark";
+import Cookies from "js-cookie";
+
+type BookmarkId = string | null;
 
 export default function PlaceCard({
   id,
@@ -12,24 +19,49 @@ export default function PlaceCard({
   binuScore,
   starScore,
   tags,
-  bookmark,
 }: Place) {
   const router = useRouter();
-  const handleClick = () => {
-    router.push(`/place/${id}`);
+  const userId = Cookies.get("userId");
+  const [bookmarkId, setBookmarkId] = useState<BookmarkId>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const bookmarkId = await getBookmark(userId, id);
+      setBookmarkId(bookmarkId);
+    }
+    fetchData();
+  }, []);
+
+  const toggleBookmark = async (prevId: BookmarkId) => {
+    if (prevId) {
+      const isDeleted = await deleteBookmarkById(prevId);
+      if (isDeleted) setBookmarkId(null);
+    } else {
+      const res = await postBookmark(userId, id);
+      setBookmarkId(res.id);
+    }
   };
+
   return (
     <article
-      onClick={handleClick}
+      onClick={() => {
+        router.push(`/place/${id}`);
+      }}
       className="flex flex-col justify-between w-full space-y-1 bg-white rounded-xl shadow p-4"
     >
       <section className="flex justify-between items-center">
         <h3 className="text-dark/95 text-[13pt] font-source font-bold">
           {name}
         </h3>
-        <button className="text-gray-400">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleBookmark(bookmarkId);
+          }}
+          className="text-gray-400"
+        >
           <Bookmark
-            className={`w-6 h-7 ${bookmark ? "fill-dark/80" : ""} stroke-1`}
+            className={`w-6 h-7 ${bookmarkId ? "fill-dark/80" : ""} stroke-1`}
           />
         </button>
       </section>

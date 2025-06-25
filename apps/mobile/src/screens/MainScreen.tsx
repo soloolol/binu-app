@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from 'react-native';
 import BottomSheet, {
   BottomSheetBackdrop,
@@ -15,13 +16,16 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {WebView} from 'react-native-webview';
 import {BottomSheetDefaultBackdropProps} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
 import Map from '@/components/Map';
+import {useAuthStore} from '@/stores/useAuthStore';
 
 export default function MainScreen() {
+  const logout = useAuthStore(state => state.logout);
   const [query, setQuery] = useState<string>('');
   const [onFocus, setOnFocus] = useState<boolean>(false);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['5%', '30%', '50%', '90%'], []);
   const coord = '127.12345;37.12345';
+  const accessToken = 'testAccesssToken';
 
   useEffect(() => {
     if (onFocus) {
@@ -79,12 +83,18 @@ export default function MainScreen() {
                     source={{
                       uri: `http://localhost:3000/search?coord=
                       ${coord}`,
+                      headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        'Binu-User-Id': 'soloolol222@gmail.com',
+                      },
                     }}
                     className="h-full w-full"
                     onMessage={event => {
-                      console.log(
-                        '웹에서 메시지 받음: ' + event.nativeEvent.data,
-                      );
+                      if (event.nativeEvent.data === 'AUTH_REQUIRED') {
+                        // 앱에서 WebView 닫기, 재로그인 유도 등
+                        Alert.alert('세션이 만료되어 로그인이 필요합니다.');
+                        logout();
+                      }
                     }}
                     onLoadStart={() => console.log('로딩 시작')}
                     onLoadEnd={() => console.log('로딩 완료')}

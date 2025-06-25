@@ -13,7 +13,6 @@ export default function RootNavigator() {
   if (!hasHydrated) {
     return <OnboardingScreen />;
   }
-
   if (isLoggedIn && hasPermissions) {
     return <MainNavigator />;
   }

@@ -21,7 +21,7 @@ export default function MyPageTab() {
       setMyBookmarkedPlaces(places);
     };
     fetchData();
-  }, []);
+  });
 
   return (
     <section className="w-full border-primary border-t-2 space-y-0">

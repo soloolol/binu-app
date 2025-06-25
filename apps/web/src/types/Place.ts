@@ -6,7 +6,6 @@ export interface Place {
   starScore: number;
   tags: string[];
   ai?: boolean;
-  bookmark?: boolean;
 }
 
 export type Review = {
