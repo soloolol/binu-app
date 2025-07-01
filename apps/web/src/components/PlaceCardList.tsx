@@ -1,4 +1,5 @@
 "use client";
+
 import PlaceCard from "./PlaceCard";
 import { use } from "react";
 import { Place } from "@/types/Place";

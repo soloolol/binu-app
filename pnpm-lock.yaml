@@ -36,6 +36,9 @@ importers:
       '@react-navigation/native-stack':
         specifier: ^7.3.14
         version: 7.3.14(@react-navigation/native@7.1.10(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.1(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native-screens@4.11.1(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
+      lucide-react-native:
+        specifier: ^0.523.0
+        version: 0.523.0(react-native-svg@15.12.0(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
       nativewind:
         specifier: ^4.1.23
         version: 4.1.23(react-native-reanimated@3.18.0(@babel/core@7.27.4)(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.4.1(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native-svg@15.12.0(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)(tailwindcss@3.4.17)
@@ -51,6 +54,12 @@ importers:
       react-native-gesture-handler:
         specifier: ^2.25.0
         version: 2.26.0(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
+      react-native-image-crop-picker:
+        specifier: ^0.50.1
+        version: 0.50.1(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
+      react-native-image-picker:
+        specifier: ^8.2.1
+        version: 8.2.1(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
       react-native-maps:
         specifier: 1.24.3
         version: 1.24.3(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
@@ -166,6 +175,9 @@ importers:
       react-dom:
         specifier: 19.0.0
         version: 19.0.0(react@19.0.0)
+      zod:
+        specifier: ^3.25.67
+        version: 3.25.67
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3
@@ -3921,6 +3933,13 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
+  lucide-react-native@0.523.0:
+    resolution: {integrity: sha512-tqTE9KJ/GMHmawG6B5jUlziObTzw1lCucmdjAIUzXVMfPx00lcKEUKN4Mr1LtyV/f20tR1LAWIs25TiAHqRR7g==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-native: '*'
+      react-native-svg: ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
+
   lucide-react@0.513.0:
     resolution: {integrity: sha512-CJZKq2g8Y8yN4Aq002GahSXbG2JpFv9kXwyiOAMvUBv7pxeOFHUWKB0mO7MiY4ZVFCV4aNjv2BJFq/z3DgKPQg==}
     peerDependencies:
@@ -4567,6 +4586,18 @@ packages:
 
   react-native-gesture-handler@2.26.0:
     resolution: {integrity: sha512-pfE1j9Vzu0qpWj/Aq1IK+cYnougN69mCKvWuq1rdNjH2zs1WIszF0Mum9/oGQTemgjyc/JgiqOOTgwcleAMAGg==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+
+  react-native-image-crop-picker@0.50.1:
+    resolution: {integrity: sha512-2xtyKLU08AFqjRb1hUsSanO2OK9aCtfjggKzVhq/GDSfOI+WRGhoElcMuKeQEi3ey6mivz7UNFOOvNCqGjzKBA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+
+  react-native-image-picker@8.2.1:
+    resolution: {integrity: sha512-FBeGYJGFDjMdGCcyubDJgBAPCQ4L1D3hwLXyUU91jY9ahOZMTbluceVvRmrEKqnDPFJ0gF1NVhJ0nr1nROFLdg==}
     peerDependencies:
       react: '*'
       react-native: '*'
@@ -5458,6 +5489,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@3.25.67:
+    resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
 
   zustand@5.0.5:
     resolution: {integrity: sha512-mILtRfKW9xM47hqxGIxCv12gXusoY/xTSHBYApXozR0HmQv299whhBeeAcRy+KrPPybzosvJBCOmVjq6x12fCg==}
@@ -10082,6 +10116,12 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
+  lucide-react-native@0.523.0(react-native-svg@15.12.0(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-native: 0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0)
+      react-native-svg: 15.12.0(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
+
   lucide-react@0.513.0(react@19.0.0):
     dependencies:
       react: 19.0.0
@@ -10816,6 +10856,16 @@ snapshots:
       '@egjs/hammerjs': 2.0.17
       hoist-non-react-statics: 3.3.2
       invariant: 2.2.4
+      react: 19.0.0
+      react-native: 0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0)
+
+  react-native-image-crop-picker@0.50.1(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-native: 0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0)
+
+  react-native-image-picker@8.2.1(react-native@0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0):
+    dependencies:
       react: 19.0.0
       react-native: 0.79.3(@babel/core@7.27.4)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0)
 
@@ -11872,6 +11922,8 @@ snapshots:
       yargs-parser: 21.1.1
 
   yocto-queue@0.1.0: {}
+
+  zod@3.25.67: {}
 
   zustand@5.0.5(@types/react@19.0.0)(react@19.0.0)(use-sync-external-store@1.5.0(react@19.0.0)):
     optionalDependencies:

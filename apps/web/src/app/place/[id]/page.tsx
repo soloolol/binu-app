@@ -1,5 +1,6 @@
+import NavigationHeader from "@/components/NavigationHeader";
 import PlaceDetails from "@/components/PlaceDetails";
-import fetchPlaceDetailsById from "@/lib/place/fetchPlaceDetailsById";
+import fetchPlaceDetailsById from "@/lib/api/place/fetchPlaceDetailsById";
 
 export default async function Page({
   params,
@@ -10,8 +11,11 @@ export default async function Page({
   const placeDetails = await fetchPlaceDetailsById(id);
 
   return (
-    <main className="flex flex-col items-center max-w-md p-3 bg-[#F4F7F6] min-h-screen">
-      <PlaceDetails {...placeDetails} />
+    <main className="flex flex-col items-center max-w-md min-h-screen p-3 bg-[#F4F7F6]">
+      <div className="flex-auto overflow-y-scroll rounded-xl shadow bg-white">
+        <NavigationHeader />
+        <PlaceDetails {...placeDetails} />
+      </div>
     </main>
   );
 }

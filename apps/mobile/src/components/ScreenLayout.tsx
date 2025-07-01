@@ -12,7 +12,7 @@ type ScreenLayoutProps = {
 export default function ScreenLayout({
   children,
   scrollable = false,
-  withPadding = true,
+  withPadding = false,
   backgroundColor = '#fafefd',
 }: ScreenLayoutProps) {
   const Container = scrollable ? ScrollView : View;

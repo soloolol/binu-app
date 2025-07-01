@@ -1,9 +1,9 @@
 import { MyInfo } from "@/types/MyInfo";
 
 const myInfo = {
-  nickName: "재빠른웜벳",
+  nickname: "재빠른웜벳",
   email: "soloolol222@gmail.com",
-  profileImgUrl: "/images/mint.png",
+  profileImgUrl: "/images/purple.png",
 };
 
 export default async function fetchPlaceDetailsById(): Promise<MyInfo> {

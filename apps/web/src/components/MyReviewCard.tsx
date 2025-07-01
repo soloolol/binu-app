@@ -2,7 +2,7 @@
 
 import { Place } from "@/types/Place";
 import TagList from "./TagList";
-import { Bookmark, PencilIcon, Trash2Icon } from "lucide-react";
+import { PencilIcon, Trash2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 interface MyReviewCardProps extends Place {

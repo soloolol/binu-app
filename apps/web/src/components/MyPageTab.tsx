@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import MyReviewCard from "./MyReviewCard";
-import fetchMyReviews from "@/lib/myPage/fetchMyReviews";
 import { MyReview } from "@/types/MyReview";
 import PlaceCard from "./PlaceCard";
 import { Place } from "@/types/Place";
-import fetchMyBookmarkedPlaces from "@/lib/myPage/fetchMyBookmarkedPlaces";
+import fetchMyBookmarkedPlaces from "@/lib/api/myPage/fetchMyBookmarkedPlaces";
+import fetchMyReviews from "@/lib/api/myPage/fetchMyReviews";
 
 export default function MyPageTab() {
   const [selected, setSelected] = useState<"activity" | "scrap">("activity");

@@ -5,9 +5,9 @@ import TagList from "./TagList";
 import { Bookmark } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import getBookmark from "@/lib/bookmark/getBookmark";
-import deleteBookmarkById from "@/lib/bookmark/deleteBookmarkById";
-import postBookmark from "@/lib/bookmark/postBookmark";
+import getBookmark from "@/lib/api/bookmark/getBookmark";
+import deleteBookmarkById from "@/lib/api/bookmark/deleteBookmarkById";
+import postBookmark from "@/lib/api/bookmark/postBookmark";
 import Cookies from "js-cookie";
 
 type BookmarkId = string | null;

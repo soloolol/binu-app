@@ -1,8 +1,6 @@
 "use client";
 
-import { ChevronLeft, PlusCircleIcon } from "lucide-react";
 import BinuScore from "./BinuScore";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { TagInfoWithIsChecked } from "@/types/Tag";
 import { useTagStore } from "@/stores/tagStore";
@@ -15,7 +13,6 @@ interface ReviewWriteProps {
 
 export default function ReviewWrite({ id, name }: ReviewWriteProps) {
   const TAG_DEFINITION = useTagStore((state) => state.tagDefinitions);
-  const router = useRouter();
   const [mustTags, setMustTags] = useState<TagInfoWithIsChecked[]>([]);
   const [optionalTags, setOptionalTags] = useState<TagInfoWithIsChecked[]>([]);
 
@@ -57,12 +54,7 @@ export default function ReviewWrite({ id, name }: ReviewWriteProps) {
   }
 
   return (
-    <div className="flex flex-col justify-between w-full space-y-8 bg-white rounded-xl border-1 border-secondary/40 shadow p-4">
-      <div className="flex justify-start items-center">
-        <button onClick={() => router.back()}>
-          <ChevronLeft className=" text-gray-500" />
-        </button>
-      </div>
+    <div className="flex flex-col justify-between w-full bg-white p-4">
       <article className="info flex flex-col justify-between items-center w-full space-y-8">
         <div className="flex justify-between items-center">
           <h3 className="text-dark/95 text-[16pt] font-source font-bold">

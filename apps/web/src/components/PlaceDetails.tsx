@@ -7,13 +7,11 @@ import {
   Bookmark,
   Share2Icon,
   PlusCircleIcon,
-  ChevronLeft,
   MessageCircleQuestionIcon,
 } from "lucide-react";
 import ReviewCard from "./ReviewCard";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import NavigationHeader from "./NavigationHeader";
 
 const notoSans = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -32,8 +30,7 @@ export default function PlaceDetails({
     router.push(`/review/[${id}]`);
   }
   return (
-    <div className="flex flex-col justify-between w-full space-y-8 bg-white rounded-xl shadow p-4">
-      <NavigationHeader />
+    <div className="flex flex-col justify-between w-full space-y-8 p-4">
       <section className="info flex flex-col justify-between w-full space-y-3">
         <section className="flex justify-between items-center">
           <h3 className="text-dark/95 text-[16pt] font-source font-bold">

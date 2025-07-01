@@ -1,5 +1,6 @@
+import NavigationHeader from "@/components/NavigationHeader";
 import ReviewWrite from "@/components/ReviewWrite";
-import fetchPlaceNameById from "@/lib/place/fetchPlaceNameById";
+import fetchPlaceNameById from "@/lib/api/place/fetchPlaceNameById";
 
 export default async function Page({
   params,
@@ -10,7 +11,8 @@ export default async function Page({
   const name = await fetchPlaceNameById(id);
 
   return (
-    <main className="flex flex-col items-center max-w-md p-3 bg-light min-h-screen">
+    <main className="flex flex-col items-center max-w-md bg-light min-h-screen">
+      <NavigationHeader />
       <ReviewWrite id={id} name={name} />
     </main>
   );
