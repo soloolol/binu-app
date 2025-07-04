@@ -28,7 +28,7 @@ export default async function Page() {
           </section>
           <BasicButton
             title={"프로필 편집"}
-            onClick={{ postMessage: "goEditProfile" }}
+            onClick={{ postMessage: "GO_EDIT_PROFILE" }}
           />
         </section>
         <MyPageTab />

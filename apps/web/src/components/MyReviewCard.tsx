@@ -3,7 +3,6 @@
 import { Place } from "@/types/Place";
 import TagList from "./TagList";
 import { PencilIcon, Trash2Icon } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 interface MyReviewCardProps extends Place {
   content: string;
@@ -17,9 +16,10 @@ export default function MyReviewCard({
   tags,
   content,
 }: MyReviewCardProps) {
-  const router = useRouter();
   const handleClick = () => {
-    router.push(`/place/${id}`);
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({ type: "GO_PLACE", id })
+    );
   };
   return (
     <article

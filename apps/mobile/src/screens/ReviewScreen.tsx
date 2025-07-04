@@ -1,36 +1,35 @@
+import {View, Alert} from 'react-native';
+
 import NavigationHeader from '@/components/NavigationHeader';
 import ScreenLayout from '@/components/ScreenLayout';
-import {MainStackParamList} from '@/navigation/MainNavigator';
-import {useAuthStore} from '@/stores/useAuthStore';
-import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {Alert, View} from 'react-native';
 import WebView from 'react-native-webview';
+import {useAuthStore} from '@/stores/useAuthStore';
+import {useRef} from 'react';
+import {RouteProp, useRoute} from '@react-navigation/native';
+import {MainStackParamList} from '@/navigation/MainNavigator';
 
-type NavigationProp = NativeStackNavigationProp<MainStackParamList, 'Main'>;
+type ReviewScreenRouteProp = RouteProp<MainStackParamList, 'Review'>;
 
-export default function MyPageScreen() {
+export default function ReviewScreen() {
+  const route = useRoute<ReviewScreenRouteProp>();
+  const {id} = route.params;
   const logout = useAuthStore(state => state.logout);
-  const navigation = useNavigation<NavigationProp>();
-
+  const webviewRef = useRef<WebView>(null);
   return (
     <ScreenLayout>
-      <NavigationHeader />
+      <NavigationHeader x={true} />
       <View className="h-full w-full ">
         <WebView
+          ref={webviewRef}
           source={{
-            uri: `http://localhost:3000/myPage`,
+            uri: `http://localhost:3000/review/${id}`,
           }}
           className="h-full w-full"
+          keyboardDisplayRequiresUserAction={false}
           onMessage={event => {
             try {
               const data = JSON.parse(event.nativeEvent.data);
-              if (data.type === 'GO_EDIT_PROFILE') {
-                navigation.navigate('EditProfile');
-              } else if (data.type === 'GO_PLACE' && data.id) {
-                console.log('받은 ID:', data.id);
-                navigation.push('Main', {id: data.id});
-              } else if (data.type === 'AUTH_REQUIRED') {
+              if (data.type === 'AUTH_REQUIRED') {
                 Alert.alert('세션이 만료되어 로그인이 필요합니다.');
                 logout();
               }

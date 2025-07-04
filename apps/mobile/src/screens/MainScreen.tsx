@@ -9,6 +9,7 @@ import {
   Alert,
   TouchableOpacity,
   Text,
+  Dimensions,
 } from 'react-native';
 import BottomSheet, {
   BottomSheetBackdrop,
@@ -20,21 +21,37 @@ import {BottomSheetDefaultBackdropProps} from '@gorhom/bottom-sheet/lib/typescri
 import Map from '@/components/Map';
 import {useAuthStore} from '@/stores/useAuthStore';
 import Animated, {
+  runOnJS,
+  useAnimatedReaction,
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
 import {RefreshCwIcon} from 'lucide-react-native';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import {MainStackParamList} from '@/navigation/MainNavigator';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import MyPageButton from '@/components/MyPageButton';
+
+type ReviewScreenRouteProp = RouteProp<MainStackParamList, 'Main'>;
 
 export default function MainScreen() {
+  const route = useRoute<ReviewScreenRouteProp>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const logout = useAuthStore(state => state.logout);
+
+  const [webviewScrollEnabled, setWebviewScrollEnabled] =
+    useState<boolean>(false);
+  const [showSearchButton, setShowSearchButton] = useState<boolean>(true);
+  const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
+  const [placeId, setPlaceId] = useState<string>(route.params?.id || '');
   const [query, setQuery] = useState<string>('');
-  const [onFocus, setOnFocus] = useState<boolean>(false);
-  const [showSearchButton, setShowSearchButton] = useState(true);
+
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['5%', '30%', '50%', '90%'], []);
   const coord = '127.12345;37.12345';
   const accessToken = 'testAccesssToken';
-  const bottomSheetPosition = useSharedValue(1); // BottomSheet 위치
+  const bottomSheetPosition = useSharedValue(1);
   const animatedButtonStyle = useAnimatedStyle(() => {
     return {
       top: bottomSheetPosition.value - 40, // 버튼 높이만큼 보정
@@ -42,10 +59,14 @@ export default function MainScreen() {
   });
 
   useEffect(() => {
-    if (onFocus) {
+    if (isSearchFocused) {
       bottomSheetRef.current?.snapToIndex(2);
     }
-  }, [onFocus]);
+  }, [isSearchFocused]);
+
+  useEffect(() => {
+    console.log('render~~');
+  });
 
   const renderBackdrop = useCallback(
     (
@@ -55,10 +76,33 @@ export default function MainScreen() {
         {...props}
         pressBehavior="collapse"
         appearsOnIndex={3}
-        disappearsOnIndex={1}
+        disappearsOnIndex={2}
       />
     ),
     [],
+  );
+
+  const [showNavigation, setShowNavigation] = useState<boolean>(true);
+  const handleShowNavigation = (v: boolean) => {
+    navigation.setOptions({headerShown: v});
+    setShowNavigation(v);
+  };
+  // bottomSeetPosition 최상단일때 웹뷰 스크롤 허용
+  const screenHeight = Dimensions.get('window').height;
+  // snapPoint인 90%를 px로 변환
+  const snapPoint90 = screenHeight * 0.1;
+  useAnimatedReaction(
+    () => bottomSheetPosition.value,
+    position => {
+      if (position <= snapPoint90 + 10) {
+        runOnJS(setWebviewScrollEnabled)(true);
+        if (placeId && showNavigation) runOnJS(handleShowNavigation)(false);
+      } else {
+        runOnJS(setWebviewScrollEnabled)(false);
+        if (placeId && !showNavigation) runOnJS(handleShowNavigation)(true);
+      }
+    },
+    [showNavigation, placeId],
   );
 
   return (
@@ -66,8 +110,10 @@ export default function MainScreen() {
       <GestureHandlerRootView style={{flex: 1}}>
         <View style={{flex: 1}}>
           <Map />
+          {/* My 버튼 */}
+          {placeId ? null : <MyPageButton />}
           {/* 재검색 버튼 */}
-          {showSearchButton && (
+          {!placeId && showSearchButton && (
             <Animated.View
               pointerEvents="box-none"
               className={`absolute w-full flex items-center`}
@@ -80,12 +126,12 @@ export default function MainScreen() {
               </TouchableOpacity>
             </Animated.View>
           )}
-
           {/* 하단 BottomSheet + WebView */}
           <BottomSheet
             ref={bottomSheetRef}
             index={1}
             snapPoints={snapPoints}
+            enableContentPanningGesture={true}
             backdropComponent={renderBackdrop}
             backgroundStyle={styles.bottomSheetBackgroundStyle}
             onAnimate={(fromIndex, toIndex) => {
@@ -93,44 +139,63 @@ export default function MainScreen() {
             }}
             animatedPosition={bottomSheetPosition}>
             <BottomSheetView style={styles.bottomSheetView}>
-              <View className="flex flex-col w-full h-full items-center bg-[#]">
-                <View className="search-bar flex flex-row justify-between w-5/6 h-14 px-4 py-2 mb-4 rounded-full bg-dark/15">
-                  <TextInput
-                    value={query}
-                    onChangeText={setQuery}
-                    onFocus={() => setOnFocus(true)}
-                    onBlur={() => setOnFocus(false)}
-                    placeholder="약속 장소를 검색하세요"
-                    inputMode="search"
-                    autoCapitalize="none"
-                    className="h-full w-4/5 text-gray-800"
-                  />
-                  <Image
-                    source={require('@assets/images/magnifyIcon.png')}
-                    className="w-6 h-full"
-                    resizeMode="contain"
-                  />
-                </View>
-                <View className="h-full w-full ">
+              <View className="flex flex-col w-full h-full  items-center">
+                {placeId ? null : (
+                  <View className="search-bar flex flex-row justify-between w-5/6 h-14 px-4 py-2 mb-4 rounded-full bg-dark/15">
+                    <TextInput
+                      value={query}
+                      onChangeText={setQuery}
+                      onFocus={() => setIsSearchFocused(true)}
+                      onBlur={() => setIsSearchFocused(false)}
+                      placeholder="약속 장소를 검색하세요"
+                      inputMode="search"
+                      autoCapitalize="none"
+                      className="h-full w-4/5 text-gray-800"
+                    />
+                    <Image
+                      source={require('@assets/images/magnifyIcon.png')}
+                      className="w-6 h-full"
+                      resizeMode="contain"
+                    />
+                  </View>
+                )}
+
+                <View className="h-full w-full">
                   <WebView
-                    source={{
-                      uri: `http://localhost:3000/search?coord=
+                    source={
+                      placeId
+                        ? {
+                            uri: `http://localhost:3000/place/${placeId}`,
+                          }
+                        : {
+                            uri: `http://localhost:3000/search?coord=
                       ${coord}`,
-                      headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                        'Binu-User-Id': 'soloolol222@gmail.com',
-                      },
-                    }}
-                    className="h-full w-full"
+                            headers: {
+                              Authorization: `Bearer ${accessToken}`,
+                              'Binu-User-Id': 'soloolol222@gmail.com',
+                            },
+                          }
+                    }
+                    className="h-full w-full scrollbar-hide"
+                    keyboardDisplayRequiresUserAction={false}
+                    scrollEnabled={webviewScrollEnabled}
                     onMessage={event => {
-                      if (event.nativeEvent.data === 'AUTH_REQUIRED') {
-                        // 앱에서 WebView 닫기, 재로그인 유도 등
-                        Alert.alert('세션이 만료되어 로그인이 필요합니다.');
-                        logout();
+                      try {
+                        const data = JSON.parse(event.nativeEvent.data);
+                        if (data.type === 'GO_REVIEW' && data.id) {
+                          console.log('받은 ID:', data.id);
+                          navigation.navigate('Review', {id: data.id});
+                        } else if (data.type === 'GO_PLACE' && data.id) {
+                          console.log('받은 ID:', data.id);
+                          navigation.push('Main', {id: data.id});
+                        } else if (data.type === 'AUTH_REQUIRED') {
+                          Alert.alert('세션이 만료되어 로그인이 필요합니다.');
+                          logout();
+                        }
+                      } catch (err) {
+                        console.warn('메시지 파싱 실패', err);
                       }
                     }}
-                    onLoadStart={() => console.log('로딩 시작')}
-                    onLoadEnd={() => console.log('로딩 완료')}
                     onError={syntheticEvent => {
                       const {nativeEvent} = syntheticEvent;
                       console.warn('웹뷰 오류:', nativeEvent);

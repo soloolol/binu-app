@@ -4,7 +4,9 @@ import { useEffect } from "react";
 
 export default function LoginPage() {
   useEffect(() => {
-    window.ReactNativeWebView?.postMessage("AUTH_REQUIRED");
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({ type: "AUTH_REQUIRED" })
+    );
   }, []);
 
   return (

@@ -27,7 +27,12 @@ export default function PlaceDetails({
 }: PlaceDetails) {
   const router = useRouter();
   function goReview(id: string) {
-    router.push(`/review/[${id}]`);
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(
+        JSON.stringify({ type: "GO_REVIEW", id })
+      );
+    }
+    // router.push(`/review/[${id}]`);
   }
   return (
     <div className="flex flex-col justify-between w-full space-y-8 p-4">

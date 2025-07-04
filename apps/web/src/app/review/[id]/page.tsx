@@ -12,7 +12,6 @@ export default async function Page({
 
   return (
     <main className="flex flex-col items-center max-w-md bg-light min-h-screen">
-      <NavigationHeader />
       <ReviewWrite id={id} name={name} />
     </main>
   );

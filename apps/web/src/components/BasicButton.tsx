@@ -24,7 +24,9 @@ export default function BasicButton({
     if ("routerPush" in onClick) {
       router.push(onClick.routerPush as string);
     } else if ("postMessage" in onClick) {
-      window.ReactNativeWebView?.postMessage(onClick.postMessage as string);
+      window.ReactNativeWebView?.postMessage(
+        JSON.stringify({ type: onClick.postMessage as string })
+      );
     } else if ("callBack" in onClick) {
       onClick.callBack();
     }

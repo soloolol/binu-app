@@ -3,7 +3,6 @@
 import { Place } from "@/types/Place";
 import TagList from "./TagList";
 import { Bookmark } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import getBookmark from "@/lib/api/bookmark/getBookmark";
 import deleteBookmarkById from "@/lib/api/bookmark/deleteBookmarkById";
@@ -20,7 +19,6 @@ export default function PlaceCard({
   starScore,
   tags,
 }: Place) {
-  const router = useRouter();
   const userId = Cookies.get("userId");
   const [bookmarkId, setBookmarkId] = useState<BookmarkId>(null);
 
@@ -31,6 +29,12 @@ export default function PlaceCard({
     }
     fetchData();
   }, []);
+
+  const handlePlaceCardClick = () => {
+    window.ReactNativeWebView?.postMessage(
+      JSON.stringify({ type: "GO_PLACE", id })
+    );
+  };
 
   const toggleBookmark = async (prevId: BookmarkId) => {
     if (prevId) {
@@ -44,9 +48,7 @@ export default function PlaceCard({
 
   return (
     <article
-      onClick={() => {
-        router.push(`/place/${id}`);
-      }}
+      onClick={handlePlaceCardClick}
       className="flex flex-col justify-between w-full space-y-1 bg-white rounded-xl shadow p-4"
     >
       <section className="flex justify-between items-center">
