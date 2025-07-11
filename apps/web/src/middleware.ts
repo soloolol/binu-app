@@ -5,16 +5,16 @@ export async function middleware(req: NextRequest) {
   const cookieToken = req.cookies.get("accessToken")?.value;
   const cookieUserId = req.cookies.get("userId")?.value;
 
-  // const authHeader = req.headers.get("authorization");
-  // const userIdHeader = req.headers.get("binu-user-id");
+  const authHeader = req.headers.get("authorization");
+  const userIdHeader = req.headers.get("binu-user-id");
 
-  // const headerToken = authHeader?.startsWith("Bearer ")
-  //   ? authHeader.split(" ")[1]
-  //   : undefined;
+  const headerToken = authHeader?.startsWith("Bearer ")
+    ? authHeader.split(" ")[1]
+    : undefined;
 
   //dev test
-  const userIdHeader = "soloolol222@google.com";
-  const headerToken = "testAccessToken";
+  // const userIdHeader = "soloolol222@google.com";
+  // const headerToken = "testAccessToken";
 
   // 2. 인증 없는 요청은 로그인 페이지로 리디렉트
   if (!cookieToken && !headerToken && !cookieUserId && !userIdHeader) {

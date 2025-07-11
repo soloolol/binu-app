@@ -26,6 +26,7 @@ export default async function SearchPage({
       <Suspense key={cacheKey} fallback={<PlaceListSkeleton />}>
         <PlaceCardList places={places} />
       </Suspense>
+      <footer className="h-8"></footer>
     </main>
   );
 }

@@ -30,6 +30,7 @@ target 'Binu' do
   # React Native Maps dependencies
   rn_maps_path = '../node_modules/react-native-maps'
   pod 'react-native-maps/Google', :path => rn_maps_path
+
   setup_permissions([
     'LocationWhenInUse',
     'PhotoLibrary',

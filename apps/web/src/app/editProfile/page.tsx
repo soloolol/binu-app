@@ -149,7 +149,7 @@ export default function ProfileEditPage() {
           </div>
         </section>
 
-        <section className="flex flex-col items-center mb-8">
+        <section className="flex flex-col items-center">
           <button
             onClick={handleSubmit}
             disabled={nicknameError !== null || isSubmitting}
@@ -159,6 +159,7 @@ export default function ProfileEditPage() {
           </button>
         </section>
       </div>
+      <footer className="h-8"></footer>
     </main>
   );
 }

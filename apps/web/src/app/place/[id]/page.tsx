@@ -14,8 +14,8 @@ export default async function Page({
     <main className="flex flex-col items-center max-w-md min-h-screen p-3 bg-[#F4F7F6]">
       <div className="flex-auto overflow-y-scroll rounded-xl shadow bg-white scrollbar-hide">
         <PlaceDetails {...placeDetails} />
-        <footer className="h-10">푸터</footer>
       </div>
+      <footer className="h-8"></footer>
     </main>
   );
 }

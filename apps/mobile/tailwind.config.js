@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 const preset = require('../../packages/config/tailwind.preset');
-import {platformSelect} from 'nativewind/theme';
 
 module.exports = {
   presets: [preset, require('nativewind/preset')],
@@ -22,6 +21,21 @@ module.exports = {
         primary: '#a1f4de',
         dark: '#1b2824',
       },
+    },
+    keyframes: {
+      bounce: {
+        '0%, 100%': {
+          transform: 'translateY(-18%)',
+          'animation-timing-function': 'cubic-bezier(0.8,0,1,1)',
+        },
+        '50%': {
+          transform: 'translateY(0) scaleX(1.1) scaleY(0.9)',
+          'animation-timing-function': 'cubic-bezier(0,0,0.2,1)',
+        },
+      },
+    },
+    animation: {
+      bounce: 'bounce 2s infinite',
     },
   },
 };

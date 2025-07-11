@@ -4,9 +4,8 @@ import MainScreen from '@/screens/MainScreen';
 import MyPageScreen from '@/screens/MyPageScreen';
 import EditProfileScreen from '@/screens/EditProfileScreen';
 import ReviewScreen from '@/screens/ReviewScreen';
-import PlaceScreen from '@/screens/PlaceScreen';
 import {ChevronLeft, X} from 'lucide-react-native';
-import {Button, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
 export type MainStackParamList = {
   Main: {id?: string};
@@ -21,7 +20,7 @@ const Stack = createNativeStackNavigator<MainStackParamList>();
 export default function MainNavigator() {
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
+      screenOptions={{headerShown: false, animation: 'none'}}
       initialRouteName="Main">
       <Stack.Screen
         name="Main"

@@ -1,45 +1,60 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useAuthStore} from '../stores/useAuthStore';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Text, View} from 'react-native';
 import ScreenLayout from '../components/ScreenLayout';
 import LogoSvg from '../../assets/images/logo.svg';
+import NaverSvg from '../../assets/images/naver_logo.svg';
+import KakaoSvg from '../../assets/images/kakao_logo.svg';
+import LoginButton from '@/components/LoginButton';
+
+interface UserInfo {
+  name?: string;
+  email: string;
+  mobileNumber?: number;
+}
 
 export default function LogInScreen() {
+  const [userInfo, setUserInfo] = useState<UserInfo>();
   const login = useAuthStore(state => state.login);
 
-  const handleKakaoLogin = async () => {
-    console.log('카카오 로그인 시도');
-    login();
-  };
-
-  const handleNaverLogin = async () => {
-    // TODO: 실제 네이버 로그인 연동
-    console.log('네이버 로그인 시도');
+  const handleLoginSuccess = async (info: any) => {
+    setUserInfo(info);
+    console.log('로그인 info:', info);
     login();
   };
 
   return (
     <ScreenLayout>
-      <View className="flex row-auto align-middle justify-center items-center w-full h-screen-safe">
-        <LogoSvg width={200} height={200} />
-
-        <Text className="font-source-semi-bold text-3xl mb-8">비누있어?</Text>
-
-        <TouchableOpacity
-          className="bg-[#FEE500] w-2/3 py-4 rounded-2xl mb-4"
-          onPress={handleKakaoLogin}>
-          <Text className="text-center font-semibold text-black">
-            카카오톡으로 시작하기
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          className="bg-[#00C73C] w-2/3 py-4 rounded-2xl"
-          onPress={handleNaverLogin}>
-          <Text className="text-center font-semibold text-white">
-            네이버로 시작하기
-          </Text>
-        </TouchableOpacity>
+      <View className="flex flex-col justify-center items-center w-full h-full">
+        <View className="flex flex-col items-center w-full gap-y-20">
+          <View className="flex flex-col items-center gap-5">
+            <View className="animate-bounce">
+              <LogoSvg width={200} height={200} />
+            </View>
+            <Text className="text-lg font-mono font-stretch-150%">
+              화장실 깨끗한데로 가고싶은데..💭
+            </Text>
+          </View>
+          <View className="flex flex-col items-center w-full gap-4">
+            <LoginButton
+              title="카카오톡으로 시작하기"
+              provider="kakao"
+              onLoginSuccess={handleLoginSuccess}>
+              <KakaoSvg width={20} height={20} />
+            </LoginButton>
+            <LoginButton
+              title="네이버로 시작하기"
+              provider="naver"
+              onLoginSuccess={handleLoginSuccess}>
+              <NaverSvg width={20} height={20} />
+            </LoginButton>
+          </View>
+          {userInfo && (
+            <View>
+              <Text>Email: {userInfo.email}</Text>
+            </View>
+          )}
+        </View>
       </View>
     </ScreenLayout>
   );

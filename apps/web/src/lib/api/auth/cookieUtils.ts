@@ -25,3 +25,10 @@ export async function setAuthCookie(
 
   return true;
 }
+
+export async function removeAuthCookie() {
+  const cookieStore = await cookies();
+
+  cookieStore.delete("accessToken");
+  cookieStore.delete("userId");
+}

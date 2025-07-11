@@ -7,7 +7,6 @@ const placeDetails: PlaceDetails = {
   binuScore: 4.8,
   starScore: 4.7,
   tags: ["hasSoap", "hasToiletPaper", "genderSeparated", "hasDiaperTable"],
-  bookmark: true,
   reviews: [
     {
       id: "123",

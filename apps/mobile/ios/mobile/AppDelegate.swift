@@ -3,6 +3,8 @@ import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
 import GoogleMaps
+import KakaoSDKAuth
+import KakaoSDKCommon
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
-      if let MAPS_API_KEY = Bundle.main.object(forInfoDictionaryKey: "GoogleMapAPI") as? String {
-        GMSServices.provideAPIKey(MAPS_API_KEY)
-      }
+    
+    //GooglMap
+    if let MAPS_API_KEY = Bundle.main.object(forInfoDictionaryKey: "GoogleMapAPI") as? String {
+      GMSServices.provideAPIKey(MAPS_API_KEY)
+    }
+    // Kakao 초기화
+    if let kakaoAppKey = Bundle.main.object(forInfoDictionaryKey: "KAKAO_APP_KEY") as? String {
+      KakaoSDK.initSDK(appKey: kakaoAppKey)
+    }
+    
     let delegate = ReactNativeDelegate()
     let factory = RCTReactNativeFactory(delegate: delegate)
     delegate.dependencyProvider = RCTAppDependencyProvider()
@@ -35,6 +44,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     return true
   }
+  
+  // Login URL Scheme 처리
+  func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    // Kakao
+    if (AuthApi.isKakaoTalkLoginUrl(url)) {
+        return AuthController.handleOpenUrl(url: url)
+    }
+    // Naver
+    if url.scheme == "naverkPNWquhkMfCjXVbHiR_Y" {
+      return NaverThirdPartyLoginConnection
+        .getSharedInstance()?
+        .application(application, open: url, options: options) ?? false
+    }
+
+    return false
+  }
 }
 
 class ReactNativeDelegate: RCTDefaultReactNativeFactoryDelegate {
@@ -50,3 +75,4 @@ class ReactNativeDelegate: RCTDefaultReactNativeFactoryDelegate {
 #endif
   }
 }
+

@@ -1,4 +1,3 @@
-import NavigationHeader from "@/components/NavigationHeader";
 import ReviewWrite from "@/components/ReviewWrite";
 import fetchPlaceNameById from "@/lib/api/place/fetchPlaceNameById";
 
@@ -13,6 +12,7 @@ export default async function Page({
   return (
     <main className="flex flex-col items-center max-w-md bg-light min-h-screen">
       <ReviewWrite id={id} name={name} />
+      <footer className="h-8"></footer>
     </main>
   );
 }
