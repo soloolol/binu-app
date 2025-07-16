@@ -7,7 +7,7 @@ export interface TagInfo {
 }
 
 export interface TagInfoWithIsChecked extends TagInfo {
-  isChecked: boolean | null;
+  isChecked: boolean | undefined;
 }
 
 export type TagDefinitions = Record<string, TagInfo>;

@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 import ReviewCard from "./ReviewCard";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useCallback, useEffect } from "react";
 
 const notoSans = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -25,15 +25,18 @@ export default function PlaceDetails({
   bookmark,
   reviews,
 }: PlaceDetails) {
-  const router = useRouter();
-  function goReview(id: string) {
+  const goReview = useCallback((id: string) => {
     if (window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(
         JSON.stringify({ type: "GO_REVIEW", id })
       );
     }
-    // router.push(`/review/[${id}]`);
-  }
+  },[])
+
+  useEffect(() => {
+   console.log("render placeDetails") 
+  },[])
+
   return (
     <div className="flex flex-col justify-between w-full space-y-8 p-4">
       <section className="info flex flex-col justify-between w-full space-y-3">

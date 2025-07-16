@@ -16,7 +16,7 @@ export default async function Page() {
               <h3 className="text-dark/95 text-[18pt] font-source font-bold">
                 {myInfo.nickname}
               </h3>
-              <span>{myInfo.email}</span>
+              <span>{myInfo.id}</span>
             </div>
             <Image
               src={myInfo.profileImgUrl}

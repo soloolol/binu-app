@@ -19,8 +19,8 @@ export default async function SearchPage({
   const cacheKey = JSON.stringify({ coord, tags, sorted });
 
   return (
-    <main className="flex flex-col items-center max-w-md min-h-screen p-3 bg-[#F4F7F6]">
-      <section className="w-full mb-1">
+    <main className="flex flex-col items-center max-w-md min-h-screen p-3 pt-0 bg-[#F4F7F6]">
+      <section className="w-full">
         <Filter />
       </section>
       <Suspense key={cacheKey} fallback={<PlaceListSkeleton />}>

@@ -8,7 +8,6 @@ const myBookmarkedPlaces: Place[] = [
     binuScore: 4.8,
     starScore: 4.7,
     tags: ["hasSoap", "hasToiletPaper", "genderSeparated", "hasDiaperTable"],
-    bookmark: true,
   },
   {
     id: "124",
@@ -23,15 +22,16 @@ const myBookmarkedPlaces: Place[] = [
       "hasBidet",
       "hasWarmWater",
     ],
-    bookmark: true,
   },
 ];
 
 export default async function fetchMyBookmarkedPlaces(): Promise<Place[]> {
   // const res = await fetch(`${process.env.API_BASE_URL}/myBookmark`, {
   //   // method: "POST",
-  //   // body: JSON.stringify(jwtKey?),
-  //   // next: { revalidate: 60 }, // ISR 사용 시
+  // headers: {
+  //   "Content-Type": "application/json",
+  // },
+  // credentials: "include",
   // });
   // const myBookmarkedPlaces: Place[] = await res.json();
   return myBookmarkedPlaces;

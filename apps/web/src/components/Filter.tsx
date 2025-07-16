@@ -35,14 +35,12 @@ export default function Filter() {
   };
 
   return (
-    <div className="flex w-full overflow-hidden pb-3 gap-x-2">
+    <div className="flex w-full overflow-hidden pt-1 pb-3 gap-x-2">
       <div className="flex whitespace-nowrap items-center gap-2">
-        <button
-          type="button"
-          className="font-source text-dark/90 font-semibold text-[10pt] px-4 py-1.5 rounded-full border-[0.5pt] bg-[#fdfdfd] transition-colors"
-        >
-          별점순
-        </button>
+        <select className="font-source text-dark/90 font-semibold text-[10pt] px-4 py-1.5 appearance-none rounded-full border-[0.5px] bg-[#fdfdfd] ml-1">
+          <option value="score">별점순</option>
+          <option value="distanse">거리순</option>
+        </select>
         <SlidersHorizontal className="stroke-1 w-5 h-5 stroke-gray-700" />
       </div>
       <div className="flex overflow-x-auto whitespace-nowrap gap-x-2 scrollbar-hide">

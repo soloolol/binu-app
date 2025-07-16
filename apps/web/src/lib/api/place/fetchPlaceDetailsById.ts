@@ -10,6 +10,7 @@ const placeDetails: PlaceDetails = {
   reviews: [
     {
       id: "123",
+      userId: "tester123",
       userNick: "깐깐한북어",
       date: "2025-06-10",
       binuScore: 4,
@@ -18,6 +19,7 @@ const placeDetails: PlaceDetails = {
     },
     {
       id: "456",
+      userId: "soloolol222@gmail.com",
       userNick: "섹시한캥거루",
       date: "2025-05-01",
       binuScore: 5,

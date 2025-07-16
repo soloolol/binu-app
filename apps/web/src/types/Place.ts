@@ -10,6 +10,7 @@ export interface Place {
 
 export type Review = {
   id: string;
+  userId: string;
   userNick: string;
   date: string;
   binuScore: number;

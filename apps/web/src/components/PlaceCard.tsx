@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import getBookmark from "@/lib/api/bookmark/getBookmark";
 import deleteBookmarkById from "@/lib/api/bookmark/deleteBookmarkById";
 import postBookmark from "@/lib/api/bookmark/postBookmark";
-import Cookies from "js-cookie";
+import { useAuthStore } from "@/stores/authStore";
 
 type BookmarkId = string | null;
 
@@ -19,7 +19,7 @@ export default function PlaceCard({
   starScore,
   tags,
 }: Place) {
-  const userId = Cookies.get("userId");
+  const userId = useAuthStore((state)=> state.userId)
   const [bookmarkId, setBookmarkId] = useState<BookmarkId>(null);
 
   useEffect(() => {

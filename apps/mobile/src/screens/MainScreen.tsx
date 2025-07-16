@@ -176,9 +176,10 @@ export default function MainScreen() {
                             },
                           }
                     }
-                    className="h-full w-full scrollbar-hide"
+                    className="h-full w-full"
                     keyboardDisplayRequiresUserAction={false}
                     scrollEnabled={webviewScrollEnabled}
+                    showsHorizontalScrollIndicator={false}
                     onMessage={event => {
                       try {
                         const data = JSON.parse(event.nativeEvent.data);

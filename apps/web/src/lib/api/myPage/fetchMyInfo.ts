@@ -2,7 +2,7 @@ import { MyInfo } from "@/types/MyInfo";
 
 const myInfo = {
   nickname: "재빠른웜벳",
-  email: "soloolol222@gmail.com",
+  id: "soloolol222@gmail.com",
   profileImgUrl: "/images/purple.png",
 };
 

@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
     : undefined;
 
   //dev test
-  // const userIdHeader = "soloolol222@google.com";
+  // const userIdHeader = "soloolol222@gmail.com";
   // const headerToken = "testAccessToken";
 
   // 2. 인증 없는 요청은 로그인 페이지로 리디렉트

@@ -1,5 +1,5 @@
 export interface MyInfo {
   nickname: string;
-  email: string;
+  id: string;
   profileImgUrl: string;
 }

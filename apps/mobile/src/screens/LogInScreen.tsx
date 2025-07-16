@@ -49,11 +49,6 @@ export default function LogInScreen() {
               <NaverSvg width={20} height={20} />
             </LoginButton>
           </View>
-          {userInfo && (
-            <View>
-              <Text>Email: {userInfo.email}</Text>
-            </View>
-          )}
         </View>
       </View>
     </ScreenLayout>
