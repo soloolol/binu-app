@@ -7,12 +7,11 @@ import { Place } from "@/types/Place";
 export default function PlaceCardList({
   places,
 }: {
-  places: Promise<Place[]>;
+  places: Place[];
 }) {
-  const allPlaces = use(places);
   return (
     <div className="w-full space-y-3">
-      {allPlaces.map((place, idx) => (
+      {places.map((place, idx) => (
         <PlaceCard key={idx} {...place} />
       ))}
     </div>

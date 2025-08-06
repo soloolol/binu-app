@@ -18,7 +18,7 @@ import BottomSheet, {
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {WebView} from 'react-native-webview';
 import {BottomSheetDefaultBackdropProps} from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types';
-import Map from '@/components/Map';
+import Map, {MapRef} from '@/components/Map';
 import {useAuthStore} from '@/stores/useAuthStore';
 import Animated, {
   runOnJS,
@@ -31,41 +31,71 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {MainStackParamList} from '@/navigation/MainNavigator';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import MyPageButton from '@/components/MyPageButton';
+import {getPlacesByRegion, Place} from '@/lib/fetchPlaces';
+import {getMyCoord} from '@/utils/getMyCoord';
+import {convertToRegion} from '@/utils/convertToRegion';
+import {Coord} from '@/types/map';
+import Filter from '@/components/Filter';
 
-type ReviewScreenRouteProp = RouteProp<MainStackParamList, 'Main'>;
+type MainScreenRouteProp = RouteProp<MainStackParamList, 'Main'>;
 
 export default function MainScreen() {
-  const route = useRoute<ReviewScreenRouteProp>();
+  const route = useRoute<MainScreenRouteProp>();
   const navigation =
     useNavigation<NativeStackNavigationProp<MainStackParamList>>();
   const logout = useAuthStore(state => state.logout);
 
+  const accessToken = 'testAccesssToken';
+
+  const webviewRef = useRef<WebView>(null);
   const [webviewScrollEnabled, setWebviewScrollEnabled] =
     useState<boolean>(false);
   const [showSearchButton, setShowSearchButton] = useState<boolean>(true);
   const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
-  const [placeId, setPlaceId] = useState<string>(route.params?.id || '');
-  const [query, setQuery] = useState<string>('');
+
+  const [coord, setCoord] = useState<Coord>();
+  const [query, setQuery] = useState<string>(route.params.query || '');
+  const [sort, setSort] = useState<string>(route.params.sort || 'score');
+  const [tags, setTags] = useState<string[]>(route.params.tags || []);
+  const [placeId, setPlaceId] = useState<string>(route.params.placeId || '');
+  const [places, setPlaces] = useState<Place[]>([]);
+  const [webviewReady, setWebviewReady] = useState(false);
+  const DELTA = 0.01;
+
+  const mapRef = useRef<MapRef>(null);
+
+  const searchPlaces = (
+    coord?: Coord,
+    query?: string,
+    sort?: string,
+    tags?: string[],
+  ) => {
+    // TODO :: 검색값들 검증
+    console.log(
+      `coord:${coord?.latitude},${coord?.longitude}, query:${query}, sort:${sort}, tags:${tags}`,
+    );
+    if (!coord) return;
+    if (!sort) return;
+    // TODO :: tanstack query로 변경하기
+    const region = convertToRegion(coord, DELTA);
+    const data = getPlacesByRegion({region, query, sort, tags});
+    setPlaces(data);
+    console.log('places result:', data);
+  };
+
+  const handleRefreshInCurrentMap = async (c: Promise<Coord> | undefined) => {
+    const coord = await c;
+    setCoord(coord);
+    searchPlaces(coord, query, sort, tags);
+  };
 
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['5%', '30%', '50%', '90%'], []);
-  const coord = '127.12345;37.12345';
-  const accessToken = 'testAccesssToken';
   const bottomSheetPosition = useSharedValue(1);
   const animatedButtonStyle = useAnimatedStyle(() => {
     return {
       top: bottomSheetPosition.value - 40, // 버튼 높이만큼 보정
     };
-  });
-
-  useEffect(() => {
-    if (isSearchFocused) {
-      bottomSheetRef.current?.snapToIndex(2);
-    }
-  }, [isSearchFocused]);
-
-  useEffect(() => {
-    console.log('render~~');
   });
 
   const renderBackdrop = useCallback(
@@ -91,6 +121,7 @@ export default function MainScreen() {
   const screenHeight = Dimensions.get('window').height;
   // snapPoint인 90%를 px로 변환
   const snapPoint90 = screenHeight * 0.1;
+
   useAnimatedReaction(
     () => bottomSheetPosition.value,
     position => {
@@ -105,11 +136,73 @@ export default function MainScreen() {
     [showNavigation, placeId],
   );
 
+  useEffect(() => {
+    console.log('route:', route.params);
+    try {
+      (async () => {
+        let myCoord = await getMyCoord();
+        let newCoord =
+          route.params.lat && route.params.lng
+            ? {latitude: route.params.lat, longitude: route.params.lng}
+            : myCoord;
+        let newQuery = route.params.query || '';
+        let newPlaceId = route.params.placeId || '';
+        let newSort = route.params.sort || 'score';
+        let newTags = route.params.tags || [];
+        setCoord(newCoord);
+        setQuery(newQuery);
+        setPlaceId(newPlaceId);
+        setSort(newSort);
+        setTags(newTags);
+        searchPlaces(newCoord, newQuery, newSort, newTags);
+      })();
+    } catch (error) {
+      // TODO:: 위치정보 오류시 설정으로 이동시키는 모달 얼러트
+      console.error('위치 정보를 가져오는 데 실패했습니다:', error);
+    }
+  }, [route.params]);
+
+  useEffect(() => {
+    if (webviewReady && places.length > 0) {
+      console.log('▶ postMessage initial places:', places);
+      webviewRef.current?.postMessage(
+        JSON.stringify({type: 'SET_PLACES', data: places}),
+      );
+    }
+  }, [webviewReady, places]);
+
+  useEffect(() => {
+    if (isSearchFocused) {
+      bottomSheetRef.current?.snapToIndex(2);
+    }
+  }, [isSearchFocused]);
+
+  useEffect(() => {
+    console.log('render~~');
+  });
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <GestureHandlerRootView style={{flex: 1}}>
         <View style={{flex: 1}}>
-          <Map />
+          <Map
+            ref={mapRef}
+            coord={coord}
+            focusedPlaceId={placeId}
+            places={places}
+            DELTA={DELTA}
+            handleFocusedPlace={(placeId: string, center: Coord) => {
+              if (route.params?.placeId) {
+                setPlaceId(placeId);
+              } else {
+                navigation.push('Main', {
+                  placeId: placeId,
+                  lat: center.latitude,
+                  lng: center.longitude,
+                });
+              }
+            }}
+          />
           {/* My 버튼 */}
           {placeId ? null : <MyPageButton />}
           {/* 재검색 버튼 */}
@@ -119,7 +212,11 @@ export default function MainScreen() {
               className={`absolute w-full flex items-center`}
               style={[animatedButtonStyle]}>
               <TouchableOpacity
-                onPress={() => console.log('재검색')}
+                onPress={() =>
+                  handleRefreshInCurrentMap(
+                    mapRef.current?.getScreenCenterCoords(),
+                  )
+                }
                 className="flex flex-row gap-2 rounded-full bg-slate-50 border-2 border-primary py-2 px-3">
                 <RefreshCwIcon size={15} color="#4FD6B2" strokeWidth={1.5} />
                 <Text>이 위치 재검색</Text>
@@ -139,37 +236,40 @@ export default function MainScreen() {
             }}
             animatedPosition={bottomSheetPosition}>
             <BottomSheetView style={styles.bottomSheetView}>
-              <View className="flex flex-col w-full h-full  items-center">
+              <View className="flex flex-col w-full h-full items-center">
                 {placeId ? null : (
-                  <View className="search-bar flex flex-row justify-between w-5/6 h-14 px-4 py-2 mb-4 rounded-full bg-dark/15">
-                    <TextInput
-                      value={query}
-                      onChangeText={setQuery}
-                      onFocus={() => setIsSearchFocused(true)}
-                      onBlur={() => setIsSearchFocused(false)}
-                      placeholder="약속 장소를 검색하세요"
-                      inputMode="search"
-                      autoCapitalize="none"
-                      className="h-full w-4/5 text-gray-800"
-                    />
-                    <Image
-                      source={require('@assets/images/magnifyIcon.png')}
-                      className="w-6 h-full"
-                      resizeMode="contain"
-                    />
+                  <View className="flex flex-col w-full items-center">
+                    <View className="search-bar flex flex-row justify-between w-5/6 h-14 px-4 py-2 mb-4 rounded-full bg-dark/15">
+                      <TextInput
+                        value={query}
+                        onChangeText={setQuery}
+                        onFocus={() => setIsSearchFocused(true)}
+                        onBlur={() => setIsSearchFocused(false)}
+                        placeholder="약속 장소를 검색하세요"
+                        inputMode="search"
+                        autoCapitalize="none"
+                        className="h-full w-4/5 text-gray-800"
+                      />
+                      <Image
+                        source={require('@assets/images/magnifyIcon.png')}
+                        className="w-6 h-full"
+                        resizeMode="contain"
+                      />
+                    </View>
+                    <Filter navigation={navigation} initTags={tags} />
                   </View>
                 )}
 
                 <View className="h-full w-full">
                   <WebView
+                    ref={webviewRef}
                     source={
                       placeId
                         ? {
                             uri: `http://localhost:3000/place/${placeId}`,
                           }
                         : {
-                            uri: `http://localhost:3000/search?coord=
-                      ${coord}`,
+                            uri: `http://localhost:3000/search`,
                             headers: {
                               Authorization: `Bearer ${accessToken}`,
                               'Binu-User-Id': 'soloolol222@gmail.com',
@@ -188,7 +288,11 @@ export default function MainScreen() {
                           navigation.navigate('Review', {id: data.id});
                         } else if (data.type === 'GO_PLACE' && data.id) {
                           console.log('받은 ID:', data.id);
-                          navigation.push('Main', {id: data.id});
+                          navigation.push('Main', {
+                            placeId: data.id,
+                            lat: coord?.latitude,
+                            lng: coord?.longitude,
+                          });
                         } else if (data.type === 'AUTH_REQUIRED') {
                           Alert.alert('세션이 만료되어 로그인이 필요합니다.');
                           logout();
@@ -196,6 +300,10 @@ export default function MainScreen() {
                       } catch (err) {
                         console.warn('메시지 파싱 실패', err);
                       }
+                    }}
+                    onLoadEnd={() => {
+                      console.log('WebView loaded');
+                      setWebviewReady(true);
                     }}
                     onError={syntheticEvent => {
                       const {nativeEvent} = syntheticEvent;

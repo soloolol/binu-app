@@ -2,7 +2,7 @@ import UIKit
 import React
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
-import GoogleMaps
+// import GoogleMaps
 import KakaoSDKAuth
 import KakaoSDKCommon
 
@@ -18,10 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
   ) -> Bool {
     
-    //GooglMap
-    if let MAPS_API_KEY = Bundle.main.object(forInfoDictionaryKey: "GoogleMapAPI") as? String {
-      GMSServices.provideAPIKey(MAPS_API_KEY)
-    }
+    // //GooglMap
+    // if let MAPS_API_KEY = Bundle.main.object(forInfoDictionaryKey: "GoogleMapAPI") as? String {
+    //   GMSServices.provideAPIKey(MAPS_API_KEY)
+    // }
+    
     // Kakao 초기화
     if let kakaoAppKey = Bundle.main.object(forInfoDictionaryKey: "KAKAO_APP_KEY") as? String {
       KakaoSDK.initSDK(appKey: kakaoAppKey)

@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.klhome.binu</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -43,8 +43,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>GoogleMapAPI</key>
-	<string>$(GOOGLE_MAP_API)</string>
 	<key>KAKAO_APP_KEY</key>
 	<string>b189240d22676c22f4c0a6ed493b5e0d</string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -58,6 +56,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NMFNcpKeyId</key>
+	<string>2gxswuzinf</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

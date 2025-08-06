@@ -30,6 +30,9 @@ importers:
       '@gorhom/bottom-sheet':
         specifier: ^5.1.6
         version: 5.1.6(@types/react@19.0.0)(react-native-gesture-handler@2.27.1(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native-reanimated@3.18.0(@babel/core@7.28.0)(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
+      '@mj-studio/react-native-naver-map':
+        specifier: ^2.5.3
+        version: 2.5.3(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
       '@react-native-async-storage/async-storage':
         specifier: ^2.2.0
         version: 2.2.0(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))
@@ -57,6 +60,12 @@ importers:
       react-native-css-interop:
         specifier: ^0.1.22
         version: 0.1.22(react-native-reanimated@3.18.0(@babel/core@7.28.0)(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native-safe-area-context@5.5.1(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native-svg@15.12.0(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0))(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)(tailwindcss@3.4.17)
+      react-native-dropdown-picker:
+        specifier: ^5.4.6
+        version: 5.4.6(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
+      react-native-geolocation-service:
+        specifier: ^5.3.1
+        version: 5.3.1
       react-native-gesture-handler:
         specifier: ^2.25.0
         version: 2.27.1(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
@@ -66,9 +75,6 @@ importers:
       react-native-image-picker:
         specifier: ^8.2.1
         version: 8.2.1(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
-      react-native-maps:
-        specifier: 1.24.3
-        version: 1.24.3(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
       react-native-permissions:
         specifier: ^5.4.1
         version: 5.4.1(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)
@@ -1194,6 +1200,12 @@ packages:
   '@jridgewell/trace-mapping@0.3.29':
     resolution: {integrity: sha512-uw6guiW/gcAGPDhLmd77/6lW8QLeiV5RUTsAX46Db6oLhGaVj4lhnPwb184s1bkc8kdVg/+h988dro8GRDpmYQ==}
 
+  '@mj-studio/react-native-naver-map@2.5.3':
+    resolution: {integrity: sha512-efqeIOnFzQReoAn+yIHaRbbgOPr5SlHyJe4OTPsC0/8v8pXSShiRwc1YIxsUcj+wmZEmZktMqczUR4rvJPnUWA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+
   '@napi-rs/wasm-runtime@0.2.11':
     resolution: {integrity: sha512-9DPkXtvHydrcOsopiYpUgPHpmj0HWZKMUnL2dZqpvC42lsratuBG06V5ipyno0fUek5VlFsNQ+AcFATSrJXgMA==}
 
@@ -1660,9 +1672,6 @@ packages:
 
   '@types/babel__traverse@7.20.7':
     resolution: {integrity: sha512-dkO5fhS7+/oos4ciWxyEyjWe48zmG6wbCheo/G2ZnHx4fs3EU6YC6UM8rk56gAjNJ9P3MTH2jo5jb92/K6wbng==}
-
-  '@types/geojson@7946.0.16':
-    resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
 
   '@types/graceful-fs@4.1.9':
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
@@ -4513,6 +4522,15 @@ packages:
       react-native-svg:
         optional: true
 
+  react-native-dropdown-picker@5.4.6:
+    resolution: {integrity: sha512-T1XBHbE++M6aRU3wFYw3MvcOuabhWZ29RK/Ivdls2r1ZkZ62iEBZknLUPeVLMX3x6iUxj4Zgr3X2DGlEGXeHsA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+
+  react-native-geolocation-service@5.3.1:
+    resolution: {integrity: sha512-LTXPtPNmrdhx+yeWG47sAaCgQc3nG1z+HLLHlhK/5YfOgfLcAb9HAkhREPjQKPZOUx8pKZMIpdGFUGfJYtimXQ==}
+
   react-native-gesture-handler@2.27.1:
     resolution: {integrity: sha512-57TUWerhdz589OcDD21e/YlL923Ma4OIpyWsP0hy7gItBCPm5d7qIUW7Yo/cS2wo1qDdOhJaNlvlBD1lDou1fA==}
     peerDependencies:
@@ -4542,17 +4560,6 @@ packages:
     peerDependencies:
       react: '*'
       react-native: '*'
-
-  react-native-maps@1.24.3:
-    resolution: {integrity: sha512-cF5oTA8z24QqGIRFfDcsXLEs/gCd0RhaJ9KPv/2HiogKD5gpjh1naimZUJQ6IsEcUngSSk8iov6p2jd7dB+/bQ==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      react: '>= 18.3.1'
-      react-native: '>= 0.76.0'
-      react-native-web: '>= 0.11'
-    peerDependenciesMeta:
-      react-native-web:
-        optional: true
 
   react-native-permissions@5.4.1:
     resolution: {integrity: sha512-MTou5DVn8IADr7OQjYePJzcxrVNEeODBvSpB8XOt5qBI9ui3HduSBn/KTNZECH/Ph2Y20OnZBMqe6Wp9IryrgQ==}
@@ -6690,6 +6697,12 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.4
 
+  '@mj-studio/react-native-naver-map@2.5.3(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      object-hash: 3.0.0
+      react: 19.0.0
+      react-native: 0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0)
+
   '@napi-rs/wasm-runtime@0.2.11':
     dependencies:
       '@emnapi/core': 1.4.4
@@ -7314,8 +7327,6 @@ snapshots:
   '@types/babel__traverse@7.20.7':
     dependencies:
       '@babel/types': 7.28.0
-
-  '@types/geojson@7946.0.16': {}
 
   '@types/graceful-fs@4.1.9':
     dependencies:
@@ -10689,6 +10700,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  react-native-dropdown-picker@5.4.6(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0):
+    dependencies:
+      react: 19.0.0
+      react-native: 0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0)
+
+  react-native-geolocation-service@5.3.1: {}
+
   react-native-gesture-handler@2.27.1(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0):
     dependencies:
       '@egjs/hammerjs': 2.0.17
@@ -10714,12 +10732,6 @@ snapshots:
 
   react-native-is-edge-to-edge@1.2.1(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0):
     dependencies:
-      react: 19.0.0
-      react-native: 0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0)
-
-  react-native-maps@1.24.3(react-native@0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0))(react@19.0.0):
-    dependencies:
-      '@types/geojson': 7946.0.16
       react: 19.0.0
       react-native: 0.79.3(@babel/core@7.28.0)(@react-native-community/cli@18.0.0(typescript@5.8.3))(@types/react@19.0.0)(react@19.0.0)
 

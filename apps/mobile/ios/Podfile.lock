@@ -6,11 +6,6 @@ PODS:
   - FBLazyVector (0.79.3)
   - fmt (11.0.2)
   - glog (0.3.5)
-  - Google-Maps-iOS-Utils (6.1.0):
-    - GoogleMaps (~> 9.0)
-  - GoogleMaps (9.3.0):
-    - GoogleMaps/Maps (= 9.3.0)
-  - GoogleMaps/Maps (9.3.0)
   - hermes-engine (0.79.3):
     - hermes-engine/Pre-built (= 0.79.3)
   - hermes-engine/Pre-built (0.79.3)
@@ -30,7 +25,35 @@ PODS:
     - KakaoSDKCommon/Common (= 2.22.0)
   - KakaoSDKUser (2.22.0):
     - KakaoSDKAuth (= 2.22.0)
+  - mj-studio-react-native-naver-map (2.5.3):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - NMapsMap (= 3.21.0)
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - naveridlogin-sdk-ios (4.2.3)
+  - NMapsGeometry (1.0.2)
+  - NMapsMap (3.21.0):
+    - NMapsGeometry
   - RCT-Folly (2024.11.18.00):
     - boost
     - DoubleConversion
@@ -1355,6 +1378,8 @@ PODS:
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
+  - react-native-geolocation-service (5.3.1):
+    - React
   - react-native-image-picker (8.2.1):
     - DoubleConversion
     - glog
@@ -1370,85 +1395,6 @@ PODS:
     - React-hermes
     - React-ImageManager
     - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - Yoga
-  - react-native-maps (1.24.3):
-    - react-native-maps/Maps (= 1.24.3)
-  - react-native-maps/Generated (1.24.3):
-    - DoubleConversion
-    - glog
-    - hermes-engine
-    - RCT-Folly (= 2024.11.18.00)
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-hermes
-    - React-ImageManager
-    - React-jsi
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - Yoga
-  - react-native-maps/Google (1.24.3):
-    - DoubleConversion
-    - glog
-    - Google-Maps-iOS-Utils (= 6.1.0)
-    - GoogleMaps (= 9.3.0)
-    - hermes-engine
-    - RCT-Folly (= 2024.11.18.00)
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-hermes
-    - React-ImageManager
-    - React-jsi
-    - react-native-maps/Generated
-    - react-native-maps/Maps
-    - React-NativeModulesApple
-    - React-RCTFabric
-    - React-renderercss
-    - React-rendererdebug
-    - React-utils
-    - ReactCodegen
-    - ReactCommon/turbomodule/bridging
-    - ReactCommon/turbomodule/core
-    - Yoga
-  - react-native-maps/Maps (1.24.3):
-    - DoubleConversion
-    - glog
-    - hermes-engine
-    - RCT-Folly (= 2024.11.18.00)
-    - RCTRequired
-    - RCTTypeSafety
-    - React-Core
-    - React-debug
-    - React-Fabric
-    - React-featureflags
-    - React-graphics
-    - React-hermes
-    - React-ImageManager
-    - React-jsi
-    - react-native-maps/Generated
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -2266,6 +2212,7 @@ DEPENDENCIES:
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
   - "kakao-login (from `../node_modules/@react-native-seoul/kakao-login`)"
+  - "mj-studio-react-native-naver-map (from `../node_modules/@mj-studio/react-native-naver-map`)"
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTDeprecation (from `../node_modules/react-native/ReactApple/Libraries/RCTFoundation/RCTDeprecation`)
@@ -2299,9 +2246,8 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
-  - react-native-maps (from `../node_modules/react-native-maps`)
-  - react-native-maps/Google (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-webview (from `../node_modules/react-native-webview`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -2348,12 +2294,12 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
-    - Google-Maps-iOS-Utils
-    - GoogleMaps
     - KakaoSDKAuth
     - KakaoSDKCommon
     - KakaoSDKUser
     - naveridlogin-sdk-ios
+    - NMapsGeometry
+    - NMapsMap
     - SocketRocket
     - TOCropViewController
 
@@ -2375,6 +2321,8 @@ EXTERNAL SOURCES:
     :tag: hermes-2025-06-04-RNv0.79.3-7f9a871eefeb2c3852365ee80f0b6733ec12ac3b
   kakao-login:
     :path: "../node_modules/@react-native-seoul/kakao-login"
+  mj-studio-react-native-naver-map:
+    :path: "../node_modules/@mj-studio/react-native-naver-map"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTDeprecation:
@@ -2437,10 +2385,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-geolocation-service:
+    :path: "../node_modules/react-native-geolocation-service"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
-  react-native-maps:
-    :path: "../node_modules/react-native-maps"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-webview:
@@ -2534,14 +2482,15 @@ SPEC CHECKSUMS:
   FBLazyVector: a62a7a5760929b6265e27bc01ab7598dde93ebd3
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
-  Google-Maps-iOS-Utils: 0a484b05ed21d88c9f9ebbacb007956edd508a96
-  GoogleMaps: b58e9627004f47043897eeae830c3ef023678f3b
   hermes-engine: 94ed01537bdeccaab1adbf94b040d115d6fa1a7f
   kakao-login: 39d7c13140ad97c54f9d42893d32ab4a1476420a
   KakaoSDKAuth: 569b377eda622d93d4575240b8031cd658163eef
   KakaoSDKCommon: d57127c339fc79e73aa8b236a4c77211c29924f1
   KakaoSDKUser: 043bcd7e91454ebf3bf64f150c430e6f65f0a08d
+  mj-studio-react-native-naver-map: 4485f20b12bdbdb7fc5900335efc2d0ee99f3951
   naveridlogin-sdk-ios: d9d46d02119d303023d7000cd5963864d5bb89e5
+  NMapsGeometry: 4e02554fa9880ef02ed96b075dc84355d6352479
+  NMapsMap: 8e7e35c2446e7c4a88d6dd0d64aa0d1de903e4f0
   RCT-Folly: e78785aa9ba2ed998ea4151e314036f6c49e6d82
   RCTDeprecation: c3e3f5b4ea83e7ff3bc86ce09e2a54b7affd687d
   RCTRequired: ee438439880dffc9425930d1dd1a3c883ee6879c
@@ -2573,8 +2522,8 @@ SPEC CHECKSUMS:
   React-logger: 514fac028fee60c84591f951c7c04ba1c5023334
   React-Mapbuffer: fae8da2c01aeb7f26ad739731b6dba61fd02fd97
   React-microtasksnativemodule: 20454ffccff553f0ee73fd20873aa8555a5867fb
+  react-native-geolocation-service: 32b2c2a3b91e70ce2a8d0c684801aaeb0a07e0ec
   react-native-image-picker: db0b3e3c7ae57680876318d4f42e7dbedd72244a
-  react-native-maps: a48f905ccf2048f130c0a55996880d479299bc1c
   react-native-safe-area-context: 091add53da15b67c76b176724725581b29a1cde3
   react-native-webview: 85c8fc8ca09f4e67b68afbc86207a1442af5dc80
   React-NativeModulesApple: 65b2735133d6ce8a3cb5f23215ef85e427b0139c
@@ -2620,6 +2569,6 @@ SPEC CHECKSUMS:
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: 29f74a5b77dca8c37669e1e1e867e5f4e12407df
 
-PODFILE CHECKSUM: 96f09c20479a94504290e31a4e821e1a6715ea04
+PODFILE CHECKSUM: 8c65f2ea6b3ddb796388807dadebae926608c153
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.15.2

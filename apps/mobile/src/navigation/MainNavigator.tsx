@@ -8,7 +8,14 @@ import {ChevronLeft, X} from 'lucide-react-native';
 import {TouchableOpacity} from 'react-native';
 
 export type MainStackParamList = {
-  Main: {id?: string};
+  Main: {
+    placeId?: string;
+    tags?: string[];
+    sort?: string;
+    query?: string;
+    lat?: number;
+    lng?: number;
+  };
   MyPage: undefined;
   Review: {id: string};
   EditProfile: undefined;
@@ -25,8 +32,11 @@ export default function MainNavigator() {
       <Stack.Screen
         name="Main"
         component={MainScreen}
+        initialParams={{sort: 'score'}}
         options={({route, navigation}) => ({
-          headerShown: route.params?.id ? true : false,
+          animation: 'none',
+          animationDuration: 0,
+          headerShown: route.params?.placeId ? true : false,
           headerTransparent: true,
           headerTitle: '',
           headerLeft: () => (
