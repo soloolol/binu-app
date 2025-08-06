@@ -31,11 +31,12 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import {MainStackParamList} from '@/navigation/MainNavigator';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import MyPageButton from '@/components/MyPageButton';
-import {getPlacesByRegion, Place} from '@/lib/fetchPlaces';
+import {fetchPlaces, Place, SearchParams} from '@/lib/fetchPlaces';
 import {getMyCoord} from '@/utils/getMyCoord';
 import {convertToRegion} from '@/utils/convertToRegion';
 import {Coord} from '@/types/map';
 import Filter from '@/components/Filter';
+import {alertToOpenSettings} from '@/utils/alertToOpenSettings';
 
 type MainScreenRouteProp = RouteProp<MainStackParamList, 'Main'>;
 
@@ -64,29 +65,30 @@ export default function MainScreen() {
 
   const mapRef = useRef<MapRef>(null);
 
-  const searchPlaces = (
-    coord?: Coord,
-    query?: string,
-    sort?: string,
-    tags?: string[],
-  ) => {
+  const searchPlaces = ({placeId, coord, query, sort, tags}: SearchParams) => {
     // TODO :: 검색값들 검증
     console.log(
-      `coord:${coord?.latitude},${coord?.longitude}, query:${query}, sort:${sort}, tags:${tags}`,
+      `placeId:${placeId}, coord:${coord?.latitude},${
+        coord?.longitude
+      }, query:${
+        query && decodeURIComponent(query)
+      }, sort:${sort}, tags:${tags}`,
     );
     if (!coord) return;
-    if (!sort) return;
     // TODO :: tanstack query로 변경하기
     const region = convertToRegion(coord, DELTA);
-    const data = getPlacesByRegion({region, query, sort, tags});
+    const data = fetchPlaces({region, placeId, query, sort, tags});
     setPlaces(data);
     console.log('places result:', data);
   };
 
   const handleRefreshInCurrentMap = async (c: Promise<Coord> | undefined) => {
     const coord = await c;
-    setCoord(coord);
-    searchPlaces(coord, query, sort, tags);
+    navigation.navigate('Main', {
+      ...route.params,
+      lat: coord?.latitude,
+      lng: coord?.longitude,
+    });
   };
 
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -154,10 +156,19 @@ export default function MainScreen() {
         setPlaceId(newPlaceId);
         setSort(newSort);
         setTags(newTags);
-        searchPlaces(newCoord, newQuery, newSort, newTags);
+        searchPlaces({
+          placeId: newPlaceId,
+          coord: newCoord,
+          query: newQuery,
+          sort: newSort,
+          tags: newTags,
+        });
       })();
     } catch (error) {
-      // TODO:: 위치정보 오류시 설정으로 이동시키는 모달 얼러트
+      alertToOpenSettings(
+        '위치 권한이 필요합니다',
+        '이 기능을 사용하려면 위치 접근 권한을 허용해주세요.',
+      );
       console.error('위치 정보를 가져오는 데 실패했습니다:', error);
     }
   }, [route.params]);
@@ -241,20 +252,36 @@ export default function MainScreen() {
                   <View className="flex flex-col w-full items-center">
                     <View className="search-bar flex flex-row justify-between w-5/6 h-14 px-4 py-2 mb-4 rounded-full bg-dark/15">
                       <TextInput
-                        value={query}
+                        value={decodeURIComponent(query)}
                         onChangeText={setQuery}
                         onFocus={() => setIsSearchFocused(true)}
                         onBlur={() => setIsSearchFocused(false)}
+                        onSubmitEditing={() => {
+                          navigation.navigate('Main', {
+                            ...route.params,
+                            query: encodeURIComponent(query),
+                          });
+                        }}
                         placeholder="약속 장소를 검색하세요"
                         inputMode="search"
+                        returnKeyType="search"
                         autoCapitalize="none"
                         className="h-full w-4/5 text-gray-800"
                       />
-                      <Image
-                        source={require('@assets/images/magnifyIcon.png')}
+                      <TouchableOpacity
                         className="w-6 h-full"
-                        resizeMode="contain"
-                      />
+                        onPressOut={() => {
+                          navigation.navigate('Main', {
+                            ...route.params,
+                            query: encodeURIComponent(query),
+                          });
+                        }}>
+                        <Image
+                          source={require('@assets/images/magnifyIcon.png')}
+                          className="w-6 h-full"
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
                     </View>
                     <Filter navigation={navigation} initTags={tags} />
                   </View>
@@ -289,9 +316,8 @@ export default function MainScreen() {
                         } else if (data.type === 'GO_PLACE' && data.id) {
                           console.log('받은 ID:', data.id);
                           navigation.push('Main', {
+                            ...route.params,
                             placeId: data.id,
-                            lat: coord?.latitude,
-                            lng: coord?.longitude,
                           });
                         } else if (data.type === 'AUTH_REQUIRED') {
                           Alert.alert('세션이 만료되어 로그인이 필요합니다.');

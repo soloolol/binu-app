@@ -1,3 +1,4 @@
+import {Coord} from '@/types/map';
 import type {Region} from '@mj-studio/react-native-naver-map';
 
 export interface Place {
@@ -403,30 +404,38 @@ const items: Place[] = [
   },
 ];
 
-interface SearchParams {
-  region: Region;
-  sort: string;
+export interface SearchParams {
+  region?: Region;
+  coord?: Coord;
+  placeId?: string;
+  sort?: string;
   query?: string;
   tags?: string[];
 }
 
-export function getPlacesByRegion({
+export function fetchPlaces({
   region,
+  placeId,
   query,
   sort,
   tags,
 }: SearchParams): Place[] {
   const ret: Place[] = [];
 
-  for (const item of items) {
-    if (
-      item.lat >= region.latitude &&
-      item.lat < region.latitude + region.latitudeDelta &&
-      item.lng >= region.longitude &&
-      item.lng < region.longitude + region.longitudeDelta
-    ) {
-      ret.push({...item});
+  // 백엔드 전달 :: placeId 만 있으면 다른값 무시하고 해당 장소만, region 과 함께 placeId가 있으면 근처 장소들과 함께 리턴
+
+  if (region) {
+    for (const item of items) {
+      if (
+        item.lat >= region.latitude &&
+        item.lat < region.latitude + region.latitudeDelta &&
+        item.lng >= region.longitude &&
+        item.lng < region.longitude + region.longitudeDelta
+      ) {
+        ret.push({...item});
+      }
     }
   }
+
   return ret;
 }

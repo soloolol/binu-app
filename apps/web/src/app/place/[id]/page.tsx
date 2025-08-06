@@ -1,4 +1,3 @@
-import NavigationHeader from "@/components/NavigationHeader";
 import PlaceDetails from "@/components/PlaceDetails";
 import fetchPlaceDetailsById from "@/lib/api/place/fetchPlaceDetailsById";
 
