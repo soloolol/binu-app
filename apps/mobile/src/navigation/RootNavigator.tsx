@@ -10,7 +10,7 @@ import fetchTagDefinitions from '@/lib/fetchTagDefinitions';
 import {useTagStore} from '@/stores/tagStore';
 
 export default function RootNavigator() {
-  const {isLoggedIn, hasHydrated} = useAuthStore();
+  const {isLoggedIn} = useAuthStore();
   const hasPermissions = usePermissionStore(state => state.hasPermissions);
   const setTagDefinitions = useTagStore(state => state.setTagDefinitions);
 
@@ -29,12 +29,11 @@ export default function RootNavigator() {
     }
   }, [isLoggedIn, hasPermissions]);
 
-  if (!hasHydrated) {
-    return <OnboardingScreen />;
-  }
-  if (isLoggedIn && hasPermissions) {
-    return <MainNavigator />;
-  }
-  if (isLoggedIn) return <PermissionNavigator />;
-  return <AuthNavigator />;
+  if (isLoggedIn === false) return <AuthNavigator />;
+
+  if (isLoggedIn && hasPermissions === false) return <PermissionNavigator />;
+
+  if (isLoggedIn && hasPermissions) return <MainNavigator />;
+
+  return <OnboardingScreen />;
 }

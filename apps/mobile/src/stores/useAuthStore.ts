@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const AUTH_KEY = 'binu-auth-storage';
 
 type AuthState = {
-  isLoggedIn: boolean;
+  isLoggedIn: boolean | undefined;
   hasHydrated: boolean;
   login: () => void;
   logout: () => void;
@@ -15,7 +15,7 @@ type AuthState = {
 export const useAuthStore = create<AuthState>()(
   persist(
     set => ({
-      isLoggedIn: false,
+      isLoggedIn: undefined,
       hasHydrated: false,
       login: () => set({isLoggedIn: true}),
       logout: () => set({isLoggedIn: false}),
