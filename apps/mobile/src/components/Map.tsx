@@ -85,12 +85,12 @@ export default forwardRef<MapRef, MapProps>(
               color: '#1B2824',
               haloColor: 'white',
               requestedWidth: 5,
-              minZoom: 16,
+              minZoom: 14,
             }}
             image={require('@assets/images/marker_bright.png')}
             width={focusedPlaceId === place.id ? 35 : 25}
             height={focusedPlaceId === place.id ? 49 : 32}
-            globalZIndex={1000}
+            globalZIndex={focusedPlaceId === place.id ? 1001 : 1000}
             onTap={() => handleMarkerClick(place)}
           />
         ))}

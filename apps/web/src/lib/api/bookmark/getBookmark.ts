@@ -6,28 +6,29 @@ export default async function getBookmark(
   if (!userId) {
     throw new Error("로그인 정보가 없습니다. userId가 존재하지 않음");
   }
-  const res = await fetch(
-    `/api/place/bookmark?userId=${userId}&placeId=${placeId}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    }
-  );
+  // const res = await fetch(
+  //   `/api/place/bookmark?userId=${userId}&placeId=${placeId}`,
+  //   {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     credentials: "include",
+  //   }
+  // );
 
-  if (!res.ok) {
-    throw new Error("서버 응답 실패: " + res.status);
-  }
+  // if (!res.ok) {
+  //   throw new Error("서버 응답 실패: " + res.status);
+  // }
 
-  const text = await res.text();
-  if (!text) return null;
+  // const text = await res.text();
+  // if (!text) return null;
 
-  try {
-    return JSON.parse(text);
-  } catch (e) {
-    console.error("JSON 파싱 실패", e);
-    return null;
-  }
+  // try {
+  //   return JSON.parse(text);
+  // } catch (e) {
+  //   console.error("JSON 파싱 실패", e);
+  //   return null;
+  // }
+  return null;
 }

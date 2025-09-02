@@ -18,17 +18,17 @@ const items: Place[] = [
     name: '안가네등갈비',
     lat: 37.5384289,
     lng: 127.1408431,
-    subtitle: '이탈리안',
+    subtitle: '식당',
     binuScore: 4.8,
     starScore: 4.7,
     tags: ['hasSoap', 'hasToiletPaper', 'genderSeparated', 'hasDiaperTable'],
   },
   {
     id: '124',
-    name: '다락방초밥집',
+    name: '사랑방초밥집',
     lat: 37.5372862,
     lng: 127.1404694,
-    subtitle: '주점',
+    subtitle: '식당',
     binuScore: 4.5,
     starScore: 4.7,
     tags: [
@@ -40,11 +40,11 @@ const items: Place[] = [
     ],
   },
   {
-    id: '125',
+    id: '333',
     name: '길동골목냉면',
     lat: 37.5376406,
     lng: 127.1414939,
-    subtitle: '주점',
+    subtitle: '식당',
     binuScore: 4.5,
     starScore: 4.7,
     tags: [
@@ -57,11 +57,11 @@ const items: Place[] = [
   },
   {
     id: '126',
-    name: '주점금붕어',
+    name: '주점은붕어',
     lat: 37.53762,
     lng: 127.1406041,
     subtitle: '주점',
-    binuScore: 4.5,
+    binuScore: 4.8,
     starScore: 4.7,
     tags: [
       'hasSoap',

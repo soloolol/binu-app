@@ -26,10 +26,10 @@ export default function MyPageScreen() {
             try {
               const data = JSON.parse(event.nativeEvent.data);
               if (data.type === 'GO_EDIT_PROFILE') {
-                navigation.navigate('EditProfile');
+                navigation.push('EditProfile');
               } else if (data.type === 'GO_PLACE' && data.id) {
                 console.log('받은 ID:', data.id);
-                navigation.push('Main', {id: data.id});
+                navigation.push('Main', {placeId: data.id});
               } else if (data.type === 'AUTH_REQUIRED') {
                 Alert.alert('세션이 만료되어 로그인이 필요합니다.');
                 logout();

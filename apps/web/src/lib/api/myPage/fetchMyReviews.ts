@@ -2,7 +2,7 @@ import { MyReview } from "@/types/MyReview";
 
 const myReviews: MyReview[] = [
   {
-    id: "123",
+    id: "126",
     name: "주점은붕어",
     subtitle: "주점",
     binuScore: 4.8,

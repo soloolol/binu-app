@@ -44,7 +44,7 @@ export default function SearchPage() {
   return (
     <main className="flex flex-col items-center max-w-md min-h-screen p-3 pt-0 bg-[#F4F7F6]">
       <PlaceCardList places={places} />
-      <footer className="h-8"></footer>
+      <footer className="h-32"></footer>
     </main>
   );
 }

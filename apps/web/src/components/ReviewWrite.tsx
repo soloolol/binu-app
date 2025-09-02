@@ -15,6 +15,7 @@ export default function ReviewWrite({ id, name }: ReviewWriteProps) {
   const TAG_DEFINITION = useTagStore((state) => state.tagDefinitions);
   const [mustTags, setMustTags] = useState<TagInfoWithIsChecked[]>([]);
   const [optionalTags, setOptionalTags] = useState<TagInfoWithIsChecked[]>([]);
+  const [reviewContent, setReviewContent] = useState<string>();
 
   useEffect(() => {
     if (!TAG_DEFINITION) return;
@@ -22,8 +23,8 @@ export default function ReviewWrite({ id, name }: ReviewWriteProps) {
     const optional: TagInfoWithIsChecked[] = [];
     Object.entries(TAG_DEFINITION).forEach(([_, value]) => {
       value.isRequired
-        ? must.push({ ...value, isChecked: null })
-        : optional.push({ ...value, isChecked: null });
+        ? must.push({ ...value, isChecked: undefined })
+        : optional.push({ ...value, isChecked: undefined });
     });
     setMustTags(must);
     setOptionalTags(optional);
@@ -106,7 +107,13 @@ export default function ReviewWrite({ id, name }: ReviewWriteProps) {
           <h4 className="text-dark/95 text-[14pt] font-source font-bold">
             추가로 도움이 될 내용을 작성해주세요 🧼
           </h4>
-          <div className="rounded-lg border-secondary border-1 bg-light p-4 w-full h-40"></div>
+            <textarea
+              className="rounded-lg border-secondary border-1 bg-light p-4 w-full h-40"
+            value={reviewContent}
+            minLength={10}
+            maxLength={100}
+            >
+            </textarea>
         </article>
 
         <button

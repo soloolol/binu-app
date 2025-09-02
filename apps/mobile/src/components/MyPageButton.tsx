@@ -10,7 +10,7 @@ export default function MyPageButton() {
   return (
     <TouchableOpacity
       className="absolute top-16 right-4"
-      onPress={() => navigation.navigate('MyPage')}>
+      onPress={() => navigation.push('MyPage')}>
       <View className="flex flex-col items-center">
         <Image
           source={{uri: 'http://localhost:3000/images/orange.png'}} // 실제 이미지 URL 대체
