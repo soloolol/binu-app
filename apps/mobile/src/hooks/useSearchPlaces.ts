@@ -75,7 +75,6 @@ export function useSearchPlaces(route: MainScreenRouteProp) {
           '위치 권한이 필요합니다',
           '이 기능을 사용하려면 위치 접근 권한을 허용해주세요.',
         );
-        console.error('위치 정보를 가져오는 데 실패했습니다:', error);
       }
     })();
   }, [route.params]);

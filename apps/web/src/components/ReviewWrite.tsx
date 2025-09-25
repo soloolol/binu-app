@@ -17,6 +17,8 @@ export default function ReviewWrite({ id, name }: ReviewWriteProps) {
   const [optionalTags, setOptionalTags] = useState<TagInfoWithIsChecked[]>([]);
   const [reviewContent, setReviewContent] = useState<string>();
 
+  // 리뷰 제출시 useActionState 사용해보기
+
   useEffect(() => {
     if (!TAG_DEFINITION) return;
     const must: TagInfoWithIsChecked[] = [];
@@ -107,13 +109,12 @@ export default function ReviewWrite({ id, name }: ReviewWriteProps) {
           <h4 className="text-dark/95 text-[14pt] font-source font-bold">
             추가로 도움이 될 내용을 작성해주세요 🧼
           </h4>
-            <textarea
-              className="rounded-lg border-secondary border-1 bg-light p-4 w-full h-40"
+          <textarea
+            className="rounded-lg border-secondary border-1 bg-light p-4 w-full h-40"
             value={reviewContent}
             minLength={10}
             maxLength={100}
-            >
-            </textarea>
+          ></textarea>
         </article>
 
         <button

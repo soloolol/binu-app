@@ -17,7 +17,7 @@ import {SearchAgainButton} from '@/components/SearchAgainButton';
 import {MainBottomSheetContent} from '@/components/MainBottomSheetContent';
 
 import {MainStackParamList} from '@/navigation/MainNavigator';
-import {useSearchPlaces, MainScreenRouteProp} from '@/hooks/useSearchPlaces';
+import {useSearchPlaces} from '@/hooks/useSearchPlaces';
 import {useMainWebViewBridge} from '@/hooks/useMainWebViewBridge';
 import {useMainBottomSheetState} from '@/hooks/useMainBottomSheetState';
 import {BOTTOM_SHEET_SNAP_POINTS} from '@/constants/map';
@@ -48,10 +48,10 @@ export default function MainScreen() {
     setQuery,
     setPlaceId,
     updateParams,
-  } = useSearchPlaces(route as MainScreenRouteProp);
+  } = useSearchPlaces(route);
 
   const {webviewRef, webviewReady, setWebviewReady, handleWebViewMessage} =
-    useMainWebViewBridge(navigation, route as MainScreenRouteProp);
+    useMainWebViewBridge(navigation, route);
 
   const [webviewScrollEnabled, setWebviewScrollEnabled] = useState(false);
 

@@ -24,6 +24,7 @@
     "lucide-react-native": "^0.523.0",
     "nativewind": "^4.1.23",
     "react-native": "0.79.3",
+    "react-native-config": "^1.5.9",
     "react-native-css-interop": "^0.1.22",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-geolocation-service": "^5.3.1",

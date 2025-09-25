@@ -3,6 +3,8 @@ import fetchMyInfo from "@/lib/api/myPage/fetchMyInfo";
 import BasicButton from "@/components/BasicButton";
 import MyPageTab from "@/components/MyPageTab";
 import LogOutButton from "@/components/LogOutButton";
+import { Suspense } from "react";
+import PlaceListSkeleton from "@/components/PlaceListSkeleton";
 
 export default async function Page() {
   const myInfo = await fetchMyInfo();
@@ -24,7 +26,6 @@ export default async function Page() {
               width={200}
               height={200}
               className="rounded-ful w-20 h-20 object-cover"
-              priority
             />
           </section>
           <BasicButton
@@ -32,7 +33,9 @@ export default async function Page() {
             onClick={{ postMessage: "GO_EDIT_PROFILE" }}
           />
         </section>
-        <MyPageTab />
+        <Suspense fallback={<PlaceListSkeleton />}>
+          <MyPageTab />
+        </Suspense>
       </div>
       <LogOutButton />
 

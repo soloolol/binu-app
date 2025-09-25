@@ -9,7 +9,7 @@ const myInfo = {
 export default async function fetchPlaceDetailsById(): Promise<MyInfo> {
   // const res = await fetch(`${process.env.API_BASE_URL}/myInfo`, {
   //   // method: "POST",
-  //   // next: { revalidate: 60 }, // ISR 사용 시
+  //   // next: { revalidate: 60 }, no-store, tag:[], force-cache
   // });
   // const myInfo: MyInfo = await res.json();
   return myInfo;

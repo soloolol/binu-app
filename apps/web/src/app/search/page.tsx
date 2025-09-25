@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import PlaceListSkeleton from '@/components/PlaceListSkeleton';
-import PlaceCardList from '@/components/PlaceCardList';
-import { Place } from '@/types/Place';
+import { useEffect, useState } from "react";
+import PlaceListSkeleton from "@/components/PlaceListSkeleton";
+import PlaceCardList from "@/components/PlaceCardList";
+import { Place } from "@/types/Place";
 
 export default function SearchPage() {
   const [places, setPlaces] = useState<Place[] | null>(null);
@@ -12,20 +12,20 @@ export default function SearchPage() {
     const handler = (event: MessageEvent) => {
       try {
         const msg = JSON.parse((event as MessageEvent).data);
-        if (msg.type === 'SET_PLACES') {
+        if (msg.type === "SET_PLACES") {
           setPlaces(msg.data);
         }
       } catch (e) {
-        console.error('메시지 파싱 실패', e);
+        console.error("메시지 파싱 실패", e);
       }
     };
 
-    window.addEventListener('message', handler as EventListener); //Ios
-    document.addEventListener('message', handler as EventListener); //Android
+    window.addEventListener("message", handler as EventListener); //Ios
+    document.addEventListener("message", handler as EventListener); //Android
 
     return () => {
-      window.removeEventListener('message', handler);
-      document.removeEventListener('message', handler as EventListener);
+      window.removeEventListener("message", handler);
+      document.removeEventListener("message", handler as EventListener);
     };
   }, []);
 
