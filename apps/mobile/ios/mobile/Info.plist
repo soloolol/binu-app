@@ -44,7 +44,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>KAKAO_APP_KEY</key>
-	<string>b189240d22676c22f4c0a6ed493b5e0d</string>
+	<string>$(KAKAO_APP_KEY)</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlechromes</string>
@@ -57,7 +57,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NMFNcpKeyId</key>
-	<string>2gxswuzinf</string>
+	<string>$(NAVER_MAP_CLIENT_ID)</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

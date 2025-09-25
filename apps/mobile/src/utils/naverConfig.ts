@@ -1,17 +1,18 @@
 import {NaverLoginInitParams} from '@react-native-seoul/naver-login';
 import {Platform} from 'react-native';
+import Config from 'react-native-config';
 
 export const naverKeys: NaverLoginInitParams = Platform.select({
   ios: {
-    consumerKey: 'kPNWquhkMfCjXVbHiR_Y',
-    consumerSecret: 'Ghan60nez7',
+    consumerKey: Config.NAVER_LOGIN_CONSUMER_KEY,
+    consumerSecret: Config.NAVER_LOGIN_CONSUMER_SECRET,
     appName: 'Binu',
-    serviceUrlSchemeIOS: 'naverkPNWquhkMfCjXVbHiR_Y',
+    serviceUrlSchemeIOS: Config.NAVER_SERVICE_URL_SCHEME_IOS,
     disableNaverAppAuthIOS: false,
   },
   android: {
-    consumerKey: 'PNWquhkMfCjXVbHiR_Y',
-    consumerSecret: 'Ghan60nez7',
+    consumerKey: Config.NAVER_LOGIN_CONSUMER_KEY,
+    consumerSecret: Config.NAVER_LOGIN_CONSUMER_SECRET,
     appName: 'Binu',
   },
 }) as NaverLoginInitParams;
