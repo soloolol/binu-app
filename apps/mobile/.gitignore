@@ -23,6 +23,16 @@ DerivedData
 *.ipa
 *.xcuserstate
 **/.xcode.env.local
+Info.plist
+GoogleService-Info.plist
+*.xcconfig
+.env
+.xcode.env
+google-services.json
+*.keystore
+*.jks
+*.p12
+*.pem
 
 # Android/IntelliJ
 #
