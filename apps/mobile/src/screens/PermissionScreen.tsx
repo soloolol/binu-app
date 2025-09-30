@@ -6,10 +6,12 @@ import {View, Text, Button, Platform, PermissionsAndroid} from 'react-native';
 import {CameraIcon, MapPinCheck} from 'lucide-react-native';
 
 export default function PermissionScreen() {
-  const setPermissions = usePermissionStore(state => state.setPermissions);
+  const setHasPermissions = usePermissionStore(
+    state => state.setHasPermissions,
+  );
 
   useEffect(() => {
-    checkPermissions(() => setPermissions(true));
+    checkPermissions(() => setHasPermissions(true));
   });
 
   async function checkPermissions(cb: () => void) {
@@ -75,7 +77,7 @@ export default function PermissionScreen() {
 
       <Button
         title="확인"
-        onPress={() => requestPermissions(() => setPermissions(true))}
+        onPress={() => requestPermissions(() => setHasPermissions(true))}
       />
     </View>
   );

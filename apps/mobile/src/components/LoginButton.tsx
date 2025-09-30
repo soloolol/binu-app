@@ -50,7 +50,9 @@ export default function LoginButton({
       } else {
         throw new Error(failureResponse?.message);
       }
+      console.log('네이버로그인중');
     } catch (e) {
+      console.log('네이버로그인중 실패');
       console.error(e);
     }
   };

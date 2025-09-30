@@ -1,7 +1,16 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
+
+project.ext.envConfigFiles = [
+    developdebug: ".env.dev",
+    developrelease: ".env.dev", 
+    productdebug: ".env.prod",    
+    productrelease: ".env.prod",
+    anothercustombuild: ".env",
+]
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -103,6 +112,14 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        develop {
+        }
+        product {
         }
     }
 }

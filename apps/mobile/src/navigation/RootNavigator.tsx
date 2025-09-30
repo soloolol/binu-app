@@ -10,7 +10,7 @@ import fetchTagDefinitions from '@/lib/fetchTagDefinitions';
 import {useTagStore} from '@/stores/tagStore';
 
 export default function RootNavigator() {
-  const {isLoggedIn} = useAuthStore();
+  const isLoggedIn = useAuthStore(state => state.isLoggedIn);
   const hasPermissions = usePermissionStore(state => state.hasPermissions);
   const setTagDefinitions = useTagStore(state => state.setTagDefinitions);
 
@@ -27,6 +27,12 @@ export default function RootNavigator() {
     if (isLoggedIn && hasPermissions) {
       initTags();
     }
+  }, [isLoggedIn, hasPermissions]);
+
+  useEffect(() => {
+    console.log('useEffect 실행');
+    console.log('isLoggedIn:', isLoggedIn);
+    console.log('hasPermissions:', hasPermissions);
   }, [isLoggedIn, hasPermissions]);
 
   if (isLoggedIn === false) return <AuthNavigator />;

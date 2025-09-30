@@ -29,7 +29,7 @@
 			<string>kakao</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>kakaob189240d22676c22f4c0a6ed493b5e0d</string>
+				<string>kakao$(KAKAO_APP_KEY)</string>
 			</array>
 		</dict>
 		<dict>
@@ -37,7 +37,7 @@
 			<string>naver</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>naverkPNWquhkMfCjXVbHiR_Y</string>
+				<string>$(NAVER_SERVICE_URL_SCHEME_IOS)</string>
 			</array>
 		</dict>
 	</array>
